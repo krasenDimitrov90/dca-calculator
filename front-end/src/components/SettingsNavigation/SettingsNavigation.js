@@ -26,7 +26,6 @@ export const SettingsNavigation = React.memo(() => {
 
     const currency = useSelector(state => state.currency.current);
 
-
     const repeatPerchaseRef = React.useRef(SELECTTORS[0].options[0]);
     const accumulateForRef = React.useRef(SELECTTORS[1].options[0]);
     const startingFromRef = React.useRef(SELECTTORS[2].options[0]);

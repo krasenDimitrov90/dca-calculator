@@ -35,6 +35,8 @@ module.exports = {
         'app-xl': '24px',
       },
       margin: {
+        'app-xs': '4px',
+        'app-s': '6px',
         'app-sm': '10px',
         'app-base': '14px',
         'app-lg': '18px',
