@@ -38,6 +38,15 @@ module.exports = {
         'app-base': '14px',
         'app-lg': '18px',
         'app-xl': '24px',
+      },
+      spacing: {
+        'app-sm': '10px', // Optional if you want to use the same values for spacing and margin
+      },
+      gap: {
+        'app-sm': '10px',
+        'app-base': '14px',
+        'app-lg': '18px',
+        'app-xl': '24px',
       }
     },
   },

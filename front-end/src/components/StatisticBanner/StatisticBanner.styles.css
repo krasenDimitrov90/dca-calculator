@@ -1,0 +1,10 @@
+.statistic-banner-item {
+    @apply flex flex-1 basis-0 h-[100px] rounded-xl p-app-lg mx-app-sm;
+}
+
+.statistic-banner-item:first-of-type {
+    @apply ml-0;
+}
+.statistic-banner-item:last-of-type {
+    @apply mr-0;
+}

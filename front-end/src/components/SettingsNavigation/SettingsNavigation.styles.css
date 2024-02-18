@@ -1,0 +1,6 @@
+.settings-navigation-container {
+    @apply flex bg-app-purple rounded-lg ml-app-sm;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+}

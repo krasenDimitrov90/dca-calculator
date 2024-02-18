@@ -10,8 +10,15 @@
   box-sizing: border-box;
 }
 
+:root {
+  --basis-app-sm: 10px;
+  --basis-app-base: 14px;
+  --basis-app-lg: 18px;
+  --basis-app-xl: 24px;
+}
+
 body {
-  @apply flex  bg-app-background-primary font-app-font-family-primary;
+  @apply flex bg-app-background-primary font-app-font-family-primary;
 }
 
 .custom-gradient-primary {
