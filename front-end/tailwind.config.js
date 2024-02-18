@@ -26,6 +26,8 @@ module.exports = {
         'app-zero': '0px',
       },
       padding: {
+        'app-xs': '4px',
+        'app-s': '6px',
         'app-sm': '10px',
         'app-base': '14px',
         'app-lg': '18px',
