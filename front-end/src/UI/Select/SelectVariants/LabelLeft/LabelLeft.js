@@ -4,11 +4,12 @@ const Option = React.memo(({ option }) => {
     return <option value={option}>{option}</option>;
 });
 
-export const LabelLeft = React.memo(({ label, options }) => {
+export const LabelLeft = React.memo(({ label, options, onChange }) => {
     const [selectedValue, setSelectedValue] = React.useState('USD');
 
     const handleChange = (event) => {
         setSelectedValue(event.target.value);
+        onChange(event.target.value);
     };
 
     return (

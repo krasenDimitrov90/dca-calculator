@@ -10,25 +10,24 @@ export const Calculator = React.memo(() => {
             <div className='flex flex-col'>
                 <div className='statistic-baner-container my-app-sm'>
                     <StatisticBanner
-                        symbol='$'
                         value="45000"
                         content="Bitcoin acumulated"
                         image={StatisticBanner.images.BTC}
                     />
                     <StatisticBanner
-                        symbol='$'
+                        leftSymbol={'$'}
                         value="45000"
                         content="Total invested"
                         image={StatisticBanner.images.USD}
                     />
                     <StatisticBanner
-                        symbol='$'
+                        leftSymbol={'$'}
                         value="45000"
                         content="Total value"
                         image={StatisticBanner.images.CHART}
                     />
                     <StatisticBanner
-                        symbol='$'
+                        rightSymbol={'%'}
                         value="45000"
                         content="Percent change"
                         image={StatisticBanner.images.ARROW_DOWN}

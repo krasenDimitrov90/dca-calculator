@@ -1,5 +1,6 @@
 import React from 'react';
 import './SettingsNavigation.styles.css'
+import { useSelector } from 'react-redux';
 
 import { Select } from '../../UI/index';
 
@@ -7,21 +8,24 @@ const SELECTTORS = [
     {
         label: 'Reapeat purchase',
         options: ['Monthly', 'Weekly', 'Daily'],
-        func: 'repeatPerchase',
+        onChange: 'repeatPerchase',
     },
     {
         label: 'Accumulate For',
         options: ['1 Year', '2 Years', '3 Years'],
-        func: 'acummulateFor',
+        onChange: 'acummulateFor',
     },
     {
         label: 'Starting',
         options: ['1 Year Ago', '2 Years Ago', '3 Years Ago',],
-        func: 'startingFrom',
+        onChange: 'startingFrom',
     }
 ];
 
 export const SettingsNavigation = React.memo(() => {
+
+    const currency = useSelector(state => state.currency.current);
+
 
     const repeatPerchaseRef = React.useRef(SELECTTORS[0].options[0]);
     const accumulateForRef = React.useRef(SELECTTORS[1].options[0]);
@@ -58,7 +62,7 @@ export const SettingsNavigation = React.memo(() => {
                             className='flex-1 rounded-l-app-s outline-none bg-app-purple pl-app-base text-app-text-primary'
                         />
                         <div className='py-app-s px-app-sm bg-[#444788] font-bold text-app-text-secondary rounded-r-app-s flex justify-center'>
-                            <p>USD</p>
+                            <p>{currency}</p>
                         </div>
                     </div>
                 </div>
@@ -70,7 +74,7 @@ export const SettingsNavigation = React.memo(() => {
                                 variant={Select.variants.LABEL_UP}
                                 label={selector.label}
                                 options={selector.options}
-                                onChange={onChangeFuncs[selector.func]}
+                                onChange={onChangeFuncs[selector.onChange]}
                             />
                         );
                     })
