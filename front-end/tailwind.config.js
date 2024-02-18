@@ -47,6 +47,14 @@ module.exports = {
         'app-base': '14px',
         'app-lg': '18px',
         'app-xl': '24px',
+      },
+      borderRadius: {
+        'app-xs': '4px',
+        'app-s': '6px',
+        'app-sm': '10px',
+        'app-base': '14px',
+        'app-lg': '18px',
+        'app-xl': '24px',
       }
     },
   },

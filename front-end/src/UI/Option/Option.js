@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const CuurencyOption = React.memo(() => {
+export const Option = React.memo(({ title }) => {
     const [selectedValue, setSelectedValue] = React.useState('USD');
 
     const handleChange = (event) => {
@@ -9,7 +9,7 @@ export const CuurencyOption = React.memo(() => {
 
     return (
         <div className="flex items-center">
-            <span className="mr-2 text-white">Currency</span>
+            {title && <span className="mr-2 text-white">{title}</span>}
             <div className="relative inline-block">
                 <select
                     value={selectedValue}
@@ -36,16 +36,4 @@ export const CuurencyOption = React.memo(() => {
             </div>
         </div>
     );
-    // return (
-    //     <div className='flex gap-4'>
-    //         <p>Currency</p>
-    //         <div>
-    //             <select defaultValue="USD" className='bg-[#282A51] w-[100px] cursor-pointer rounded'>
-    //                 <option value="USD">USD</option>
-    //                 <option value="EUR">EUR</option>
-    //                 <option value="BGN">BGN</option>
-    //             </select>
-    //         </div>
-    //     </div>
-    // );
 });

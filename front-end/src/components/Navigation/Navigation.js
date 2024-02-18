@@ -1,6 +1,6 @@
 import React from 'react';
 import './Navigation.styles.css';
-import { CuurencyOption } from '../CuurencyOption/CuurencyOption';
+import { Option } from '../../UI/Option/Option';
 
 export const Navigation = React.memo(() => {
     return (
@@ -13,7 +13,7 @@ export const Navigation = React.memo(() => {
                 </div>
                 <h3 className='text-app-xl'>Dollar Cost Average</h3>
             </div>
-            <CuurencyOption />
+            <Option title='Currency' />
         </div>
     );
 });

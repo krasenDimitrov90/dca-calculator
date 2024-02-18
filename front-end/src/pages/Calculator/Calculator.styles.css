@@ -3,7 +3,7 @@
 }
 
 .portfolio-left-section-wrapper {
-    @apply flex bg-app-purple rounded-lg mr-app-sm h-[700px];
+    @apply flex bg-app-purple rounded-app-s mr-app-sm h-[700px];
     flex-grow: 3;
     flex-shrink: 3;
 

@@ -6,7 +6,7 @@ export const StatisticBanner = React.memo(({
 }) => {
     return (
         <div className='statistic-banner-item custom-gradient-primary'>
-            <div className='flex bg-app-purple p-app-sm rounded-lg mr-app-lg'>
+            <div className='flex bg-app-purple p-app-sm rounded-app-s mr-app-lg'>
                 <img src={image} alt="btc" />
             </div>
             <div className='flex flex-col justify-center'>
