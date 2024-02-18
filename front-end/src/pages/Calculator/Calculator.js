@@ -36,8 +36,12 @@ export const Calculator = React.memo(() => {
 
                 </div>
                 <div className='flex my-app-sm'>
-                    <PortfolioChart />
-                    <SettingsNavigation />
+                    <div className='portfolio-left-section-wrapper custom-gradient-secondary'>
+                        <PortfolioChart />
+                    </div>
+                    <div className='portfolio-right-section-wrapper'>
+                        <SettingsNavigation />
+                    </div>
                 </div>
             </div>
         </div>

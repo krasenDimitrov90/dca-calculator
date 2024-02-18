@@ -1,9 +1,3 @@
-
-.portfolio-chart-container {
-    @apply flex bg-app-purple rounded-lg mr-app-sm;
-    flex-grow: 3;
-    flex-shrink: 3;
-
-    /* This come from the index.css file :root */
-    flex-basis: calc(4 * var(--basis-app-sm)); 
-}
+/* .portfolio-chart-container {
+    
+} */

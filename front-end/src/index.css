@@ -26,6 +26,11 @@ body {
   background: linear-gradient(90deg, rgba(40, 42, 82, 1) 5%, rgba(54, 57, 105, 1) 43%, rgba(52, 55, 102, 1) 52%, rgba(40, 42, 82, 1) 93%);
 }
 
+.custom-gradient-secondary {
+  background: rgb(53, 56, 102);
+  background: linear-gradient(133deg, rgba(53, 56, 102, 1) 5%, rgba(36, 38, 76, 1) 55%);
+}
+
 #root {
   @apply flex flex-1 justify-center;
 }

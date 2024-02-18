@@ -1,3 +1,19 @@
 .statistic-baner-container {
     @apply flex;
 }
+
+.portfolio-left-section-wrapper {
+    @apply flex bg-app-purple rounded-lg mr-app-sm h-[700px];
+    flex-grow: 3;
+    flex-shrink: 3;
+
+    /* This come from the index.css file :root */
+    flex-basis: calc(4 * var(--basis-app-sm));
+}
+
+.portfolio-right-section-wrapper {
+    @apply flex flex-col rounded-lg ml-app-sm;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+}
