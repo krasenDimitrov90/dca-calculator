@@ -1,6 +1,10 @@
 import React from 'react';
 
-export const Option = React.memo(({ title }) => {
+const Option = React.memo(({ option }) => {
+    return <option value={option}>{option}</option>;
+});
+
+export const LabelLeft = React.memo(({ label, options }) => {
     const [selectedValue, setSelectedValue] = React.useState('USD');
 
     const handleChange = (event) => {
@@ -8,17 +12,22 @@ export const Option = React.memo(({ title }) => {
     };
 
     return (
-        <div className="flex items-center">
-            {title && <span className="mr-2 text-white">{title}</span>}
+        <div>
+            <span className="mr-2 text-white">{label}</span>
             <div className="relative inline-block">
                 <select
                     value={selectedValue}
                     onChange={handleChange}
-                    className="appearance-none bg-[#282A51] w-[100px] cursor-pointer rounded p-app-xs pr-10 pl-2 text-white outline-none"
+                    className="appearance-none bg-app-purple-secondary w-[100px] cursor-pointer rounded p-app-xs pr-10 pl-2 text-white outline-none"
                 >
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="BGN">BGN</option>
+                    {options.map(option => {
+                        return (
+                            <Option
+                                key={`option-lable-left-${option}`}
+                                option={option}
+                            />
+                        );
+                    })}
                 </select>
                 <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                     <svg
@@ -34,6 +43,6 @@ export const Option = React.memo(({ title }) => {
                     </svg>
                 </div>
             </div>
-        </div>
+        </div >
     );
 });

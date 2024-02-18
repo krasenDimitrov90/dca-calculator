@@ -10,6 +10,7 @@ module.exports = {
         "app-text-primary": "#FFFFFF",
         "app-text-secondary": "#7477BC",
         'app-purple': "#383B6D",
+        'app-purple-secondary': '#282A51'
       },
       fontFamily: {
         "app-font-family-primary": ["Quicksand", "sans-serif"],

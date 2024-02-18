@@ -1,6 +1,6 @@
 import React from 'react';
 import './Navigation.styles.css';
-import { Option } from '../../UI/Option/Option';
+import { Select } from '../../UI/Select/Select';
 
 export const Navigation = React.memo(() => {
     return (
@@ -13,7 +13,11 @@ export const Navigation = React.memo(() => {
                 </div>
                 <h3 className='text-app-xl'>Dollar Cost Average</h3>
             </div>
-            <Option title='Currency' />
+            <Select
+                variant={Select.variants.LABEL_LEFT}
+                label='Currency'
+                options={['USD', 'EUR', 'BGN']}
+            />
         </div>
     );
 });
