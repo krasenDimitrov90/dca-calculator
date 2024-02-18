@@ -4,7 +4,7 @@ import { Navigation, StatisticBanner } from '../../components/index';
 
 export const Calculator = React.memo(() => {
     return (
-        <div>
+        <div className='container'>
             <Navigation />
 
             <div className='flex gap-8'>

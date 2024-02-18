@@ -14,7 +14,24 @@ module.exports = {
       fontFamily: {
         "app-font-family-primary": ["Quicksand", "sans-serif"],
       },
+      fontSize: {
+        'app-sm': ['10px', '10px'],
+        'app-base': ['14px', '14px'],
+        'app-lg': ['18px', '18px'],
+        'app-xl': ['24px', '24px'],
+        'app-2xl': ['30px', '30px'],
+        'app-3xl': ['34px', '34px'],
+      },
+      lineHeight: {
+        'app-zero': '0px',
+      },
       padding: {
+        'app-sm': '10px',
+        'app-base': '14px',
+        'app-lg': '18px',
+        'app-xl': '24px',
+      },
+      margin: {
         'app-sm': '10px',
         'app-base': '14px',
         'app-lg': '18px',

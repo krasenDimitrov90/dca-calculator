@@ -11,22 +11,18 @@
 }
 
 body {
-  @apply bg-app-background-primary font-app-font-family-primary;
+  @apply flex  bg-app-background-primary font-app-font-family-primary;
 }
 
 .custom-gradient-primary {
-  /* @apply bg-gradient-to-r  from-[#363969] from-40% to-[#282A52]; */
   background: rgb(40, 42, 82);
   background: linear-gradient(90deg, rgba(40, 42, 82, 1) 5%, rgba(54, 57, 105, 1) 43%, rgba(52, 55, 102, 1) 52%, rgba(40, 42, 82, 1) 93%);
 }
 
-/* body {
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-} */
+#root {
+  @apply flex flex-1 justify-center;
+}
 
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
+.container {
+  @apply flex-1 px-app-lg max-w-[1800px];
+}
