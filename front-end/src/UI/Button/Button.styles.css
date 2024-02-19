@@ -1,0 +1,12 @@
+.btn-main {
+    @apply flex items-center justify-center font-bold text-app-text-primary;
+    @apply rounded-app-xs h-app-2xl;
+    background: linear-gradient(to left, #4834d4 50%, #2e86de 50%) right;
+    background-size: 200%;
+    transition: .3s ease-out;
+
+}
+
+.btn-main:hover {
+    background-position: left;
+}

@@ -4,7 +4,7 @@ const Option = React.memo(({ option }) => {
     return <option value={option}>{option}</option>;
 });
 
-export const LabelUp = React.memo(({ label, options, onChange }) => {
+export const LabelUp = React.memo(({ label, name, options, onChange }) => {
     const [selectedValue, setSelectedValue] = React.useState('USD');
 
     const handleChange = (event) => {
@@ -14,12 +14,13 @@ export const LabelUp = React.memo(({ label, options, onChange }) => {
 
     return (
         <div className='flex flex-col'>
-            <span className="mr-2 font-bold text-app-text-secondary">{label}</span>
+            <label className="mr-2 font-bold text-app-text-secondary">{label}</label>
             <div className="relative flex">
                 <select
+                    name={name}
                     value={selectedValue}
                     onChange={handleChange}
-                    className="appearance-none flex-1 bg-app-purple h-[36px] w-[100px] cursor-pointer rounded p-app-xs pr-10 pl-2 text-white outline-none"
+                    className="appearance-none flex-1 bg-app-purple h-app-2xl w-[100px] cursor-pointer rounded p-app-xs pr-10 pl-2 text-white outline-none"
                 >
                     {options.map(option => {
                         return (

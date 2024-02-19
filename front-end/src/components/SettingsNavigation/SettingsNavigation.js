@@ -2,21 +2,24 @@ import React from 'react';
 import './SettingsNavigation.styles.css'
 import { useSelector } from 'react-redux';
 
-import { Select } from '../../UI/index';
+import { Button, Input, Select } from '../../UI/index';
 
 const SELECTTORS = [
     {
         label: 'Reapeat purchase',
+        name: 'reapeatPurchase',
         options: ['Monthly', 'Weekly', 'Daily'],
         onChange: 'repeatPerchase',
     },
     {
         label: 'Accumulate For',
+        name: 'accumulateFor',
         options: ['1 Year', '2 Years', '3 Years'],
         onChange: 'acummulateFor',
     },
     {
         label: 'Starting',
+        name: 'starting',
         options: ['1 Year Ago', '2 Years Ago', '3 Years Ago',],
         onChange: 'startingFrom',
     }
@@ -25,6 +28,8 @@ const SELECTTORS = [
 export const SettingsNavigation = React.memo(() => {
 
     const currency = useSelector(state => state.currency.current);
+
+    const formRef = React.useRef(null);
 
     const repeatPerchaseRef = React.useRef(SELECTTORS[0].options[0]);
     const accumulateForRef = React.useRef(SELECTTORS[1].options[0]);
@@ -47,24 +52,29 @@ export const SettingsNavigation = React.memo(() => {
         acummulateFor: onAcummulateForChange,
         startingFrom: onStartingFromChange
     };
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+
+        const data = Object.fromEntries(new FormData(formRef.current));
+
+        console.log(data);
+    };
+
     return (
         <div className='settings-navigation-container custom-gradient-secondary'>
             <div className='flex mb-app-lg text-app-text-primary'>
                 <p>Settings</p>
             </div>
 
-            <div className='flex flex-col gap-app-base'>
-                <div>
-                    <label htmlFor="purchaseAmount" className='font-bold text-app-text-secondary '>Purchase amount:</label>
-                    <div className='flex'>
-                        <input type="number" name="purchaseAmount" required
-                            className='flex-1 rounded-l-app-s outline-none bg-app-purple pl-app-base text-app-text-primary'
-                        />
-                        <div className='py-app-s px-app-sm bg-[#444788] font-bold text-app-text-secondary rounded-r-app-s flex justify-center'>
-                            <p>{currency}</p>
-                        </div>
-                    </div>
-                </div>
+            <form ref={formRef} className='flex flex-col gap-app-base'>
+                <Input
+                    name='purchaseAmount'
+                    label='Purchase amount:'
+                    type='number'
+                    inputDescription={currency}
+
+                />
                 {
                     SELECTTORS.map(selector => {
                         return (
@@ -72,18 +82,20 @@ export const SettingsNavigation = React.memo(() => {
                                 key={`${selector.label}`}
                                 variant={Select.variants.LABEL_UP}
                                 label={selector.label}
+                                name={selector.name}
                                 options={selector.options}
                                 onChange={onChangeFuncs[selector.onChange]}
                             />
                         );
                     })
                 }
-            </div>
-            <button onClick={() => {
-                console.log(repeatPerchaseRef.current)
-                console.log(accumulateForRef.current)
-                console.log(startingFromRef.current)
-            }}>OK</button>
+                <Button
+                    onClick={submitHandler}
+                >
+                    CALCULATE
+                </Button>
+            </form>
+
         </div>
     );
 });

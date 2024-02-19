@@ -10,7 +10,10 @@ module.exports = {
         "app-text-primary": "#FFFFFF",
         "app-text-secondary": "#7477BC",
         'app-purple': "#383B6D",
-        'app-purple-secondary': '#282A51'
+        'app-purple-secondary': '#282A51',
+        'app-purple-third': '#444788',
+        'app-blue-primary': '#737CD9',
+        'app-bluepurple-primary': '#4834d4',
       },
       fontFamily: {
         "app-font-family-primary": ["Quicksand", "sans-serif"],
@@ -58,7 +61,13 @@ module.exports = {
         'app-base': '14px',
         'app-lg': '18px',
         'app-xl': '24px',
-      }
+      },
+      height: {
+        'app-2xl': '36px',
+      },
+      backgroundSize: {
+        '200%': '200%'
+      },
     },
   },
   plugins: [],
