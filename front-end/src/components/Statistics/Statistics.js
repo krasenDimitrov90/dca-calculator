@@ -1,5 +1,7 @@
 import React from 'react';
 import './Statistics.styles.css';
+
+import { useSelector } from 'react-redux';
 import { StatisticBanner } from '../../UI';
 
 const banners = [
@@ -29,9 +31,27 @@ const banners = [
 ];
 
 export const Statistics = React.memo(() => {
+
+    const portfolio = useSelector(state => state.portfolio);
+    const currency = useSelector(state => state.currency.current);
+    console.log({ portfolio, currency })
+
     return (
         <div className='flex my-app-sm'>
-            {
+         {
+                Object.values(portfolio).map(banner => {
+                    return (
+                        <StatisticBanner
+                            key={`statistic-banner-${banner.label}`}
+                            symbol={banner.symbols?.[currency]}
+                            value={banner.value}
+                            label={banner.label}
+                            image={StatisticBanner.images[banner.image]}
+                        />
+                    );
+                })
+            }
+            {/* {
                 banners.map(banner => {
                     return (
                         <StatisticBanner
@@ -43,31 +63,7 @@ export const Statistics = React.memo(() => {
                         />
                     );
                 })
-            }
-            {/* <StatisticBanner
-                value="45000"
-                label="Bitcoin acumulated"
-                image={StatisticBanner.images.BTC}
-            />
-            <StatisticBanner
-                leftSymbol={'$'}
-                value="45000"
-                label="Total invested"
-                image={StatisticBanner.images.USD}
-            />
-            <StatisticBanner
-                leftSymbol={'$'}
-                value="45000"
-                label="Total value"
-                image={StatisticBanner.images.CHART}
-            />
-            <StatisticBanner
-                rightSymbol={'%'}
-                value="45000"
-                label="Percent change"
-                image={StatisticBanner.images.ARROW_DOWN}
-            /> */}
-
+            } */}
         </div>
     );
 });
