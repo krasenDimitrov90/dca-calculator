@@ -34,7 +34,6 @@ export const Statistics = React.memo(() => {
 
     const portfolio = useSelector(state => state.portfolio);
     const currency = useSelector(state => state.currency.current);
-    console.log({ portfolio, currency })
 
     return (
         <div className='flex my-app-sm'>

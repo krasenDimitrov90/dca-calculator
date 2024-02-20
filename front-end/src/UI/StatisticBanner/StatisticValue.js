@@ -8,7 +8,6 @@ export const StatisticValue = React.memo(({ symbol, value }) => {
     }, []);
 
     const formatedValue = formatValue(value);
-    console.log({ symbol })
 
     return (
         <div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import './SettingsNavigation.styles.css'
 import { useSelector } from 'react-redux';
+import { createYearsArray } from '../../utils';
 
 import { Button, Input, Select } from '../../UI/index';
 
@@ -14,13 +15,15 @@ const SELECTTORS = [
     {
         label: 'Accumulate For',
         name: 'accumulateFor',
-        options: ['1 Year', '2 Years', '3 Years'],
+        // options: ['1 Year', '2 Years', '3 Years'],
+        options: createYearsArray('primary'),
         onChange: 'acummulateFor',
     },
     {
         label: 'Starting',
         name: 'starting',
-        options: ['1 Year Ago', '2 Years Ago', '3 Years Ago',],
+        // options: ['1 Year Ago', '2 Years Ago', '3 Years Ago',],
+        options: createYearsArray('secondary'),
         onChange: 'startingFrom',
     }
 ];
@@ -47,7 +50,7 @@ export const SettingsNavigation = React.memo(() => {
         startingFromRef.current = value;
     }, []);
 
-    const onChangeFuncs = {
+    const onChangeHandlers = {
         repeatPerchase: onRepeatPurchaseChange,
         acummulateFor: onAcummulateForChange,
         startingFrom: onStartingFromChange
@@ -77,6 +80,7 @@ export const SettingsNavigation = React.memo(() => {
                 />
                 {
                     SELECTTORS.map(selector => {
+                        if ('years' in selector) console.log({ years: selector.years })
                         return (
                             <Select
                                 key={`${selector.label}`}
@@ -84,7 +88,7 @@ export const SettingsNavigation = React.memo(() => {
                                 label={selector.label}
                                 name={selector.name}
                                 options={selector.options}
-                                onChange={onChangeFuncs[selector.onChange]}
+                                onChange={onChangeHandlers[selector.onChange]}
                             />
                         );
                     })
