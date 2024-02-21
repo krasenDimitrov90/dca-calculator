@@ -5,13 +5,13 @@ const { convertDateInZeroHours } = require('../../utils/dateConvertors');
 
 module.exports.getHistory = (req, res, next) => {
 
-    const { start: startDate, end: endDate } = req.query;
-    console.log({ startDate, endDate })
+    const { start: startDate, end: endDate, "repetition-period": repetitionPeriod } = req.query;
+    console.log({ startDate, endDate, repetitionPeriod })
 
     const formatedStartDate = convertDateInZeroHours(startDate);
     const formatedEndDate = convertDateInZeroHours(endDate);
 
-    Bitcoin.getAllDays(formatedStartDate, formatedEndDate)
+    Bitcoin.queryMethods[repetitionPeriod](formatedStartDate, formatedEndDate)
         .then(result => {
             res.json(result);
         })

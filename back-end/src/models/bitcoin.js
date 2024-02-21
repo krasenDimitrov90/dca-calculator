@@ -49,4 +49,10 @@ Bitcoin.getAllDays = function (start, end) {
     });
 };
 
+Bitcoin.queryMethods = {
+    'Monthly': Bitcoin.getFirstDayOfMonths.bind(Bitcoin),
+    'Weekly': Bitcoin.getMondaysOfMonths.bind(Bitcoin),
+    'Daily': Bitcoin.getAllDays.bind(Bitcoin),
+};
+
 module.exports = Bitcoin
