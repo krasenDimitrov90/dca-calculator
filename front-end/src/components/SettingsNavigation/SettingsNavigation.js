@@ -61,6 +61,10 @@ export const SettingsNavigation = React.memo(() => {
 
         const data = Object.fromEntries(new FormData(formRef.current));
 
+        // const formatedData = {
+        //     amaunt
+        // };
+
         console.log(data);
     };
 

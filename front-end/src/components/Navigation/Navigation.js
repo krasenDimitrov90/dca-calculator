@@ -14,7 +14,7 @@ export const Navigation = React.memo(() => {
     };
 
     return (
-        <div className='flex justify-between text-app-text-primary py-app-base'>
+        <div className='flex flex-col desktop:flex-row justify-between text-app-text-primary py-app-base'>
             <div className='flex items-end py-app-xs'>
                 <div className='flex items-end h-full gap-[6px] py-[3px] mr-app-base'>
                     <span className='flex bg-app-blue-primary h-[25%] w-[3px] rounded'></span>

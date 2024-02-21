@@ -1,0 +1,12 @@
+
+/* Added here couse for some reason on Iphone the input element has borders
+/  on all corners when using tailwind, no metter if explicitly tell border-r-0
+/  it does not apply it.
+*/
+.app-input {
+    @apply flex-1 outline-none bg-app-purple pl-app-base text-app-text-primary;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
