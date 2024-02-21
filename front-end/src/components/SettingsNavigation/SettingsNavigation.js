@@ -80,7 +80,6 @@ export const SettingsNavigation = React.memo(() => {
                 />
                 {
                     SELECTTORS.map(selector => {
-                        if ('years' in selector) console.log({ years: selector.years })
                         return (
                             <Select
                                 key={`${selector.label}`}
