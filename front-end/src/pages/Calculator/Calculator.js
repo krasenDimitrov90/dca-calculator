@@ -9,7 +9,7 @@ export const Calculator = React.memo(() => {
 
             <div className='flex flex-col'>
                 <Statistics />
-                <div className='flex my-app-sm'>
+                <div className='flex flex-col-reverse desktop:flex-row my-app-sm'>
                     <div className='portfolio-left-section-wrapper custom-gradient-secondary'>
                         <PortfolioChart />
                     </div>

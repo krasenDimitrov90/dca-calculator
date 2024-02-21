@@ -3,7 +3,7 @@
 }
 
 .portfolio-left-section-wrapper {
-    @apply flex bg-app-purple rounded-app-s mr-app-sm h-[390px];
+    @apply flex bg-app-purple rounded-app-s desktop:mr-app-sm mt-app-sm desktop:mt-0 ;
     flex-grow: 3;
     flex-shrink: 3;
 
@@ -12,7 +12,7 @@
 }
 
 .portfolio-right-section-wrapper {
-    @apply flex flex-col rounded-lg ml-app-sm;
+    @apply flex flex-col rounded-lg desktop:ml-app-sm mb-app-sm desktop:mb-0;
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: 0;
