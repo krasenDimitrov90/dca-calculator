@@ -69,7 +69,7 @@ export const SettingsNavigation = React.memo(() => {
     };
 
     return (
-        <div className='settings-navigation-container custom-gradient-secondary'>
+        <div className='custom-gradient-secondary flex flex-col p-app-lg rounded-app-s'>
             <div className='flex mb-app-lg text-app-text-primary'>
                 <p>Settings</p>
             </div>
@@ -80,6 +80,8 @@ export const SettingsNavigation = React.memo(() => {
                     label='Purchase amount:'
                     type='number'
                     inputDescription={currency}
+                    initialValue={50}
+                    min={1}
 
                 />
                 {
