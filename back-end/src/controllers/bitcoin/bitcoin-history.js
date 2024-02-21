@@ -6,20 +6,12 @@ const { convertDateInZeroHours } = require('../../utils/dateConvertors');
 module.exports.getHistory = (req, res, next) => {
 
     const { start: startDate, end: endDate } = req.query;
+    console.log({ startDate, endDate })
 
     const formatedStartDate = convertDateInZeroHours(startDate);
     const formatedEndDate = convertDateInZeroHours(endDate);
 
-
-    Bitcoin.find({
-        date: {
-            $gte: formatedStartDate,
-            $lt: formatedEndDate
-        },
-        $expr: {
-            $eq: [{ $dayOfMonth: "$date" }, 1]
-        }
-    })
+    Bitcoin.getAllDays(formatedStartDate, formatedEndDate)
         .then(result => {
             res.json(result);
         })
