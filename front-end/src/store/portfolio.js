@@ -2,24 +2,24 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     "bitcoin-acumulated": {
-        value: 2.169160,
+        value: 0,
         label: "Bitcoin acumulated",
         image: 'BTC',
     },
     "total-invested": {
-        value: 53000,
+        value: 0,
         label: "Total invested",
         image: 'USD',
         symbols: { USD: '$', EUR: '€', BGN: 'lv' }
     },
     "total-value": {
-        value: 23454,
+        value: 0,
         label: "Total value",
         image: 'CHART',
         symbols: { USD: '$', EUR: '€', BGN: 'lv' }
     },
     "percent-change": {
-        value: 45,
+        value: 0,
         label: "Percent change",
         image: 'ARROW_DOWN',
         symbols: { USD: '%', EUR: '%', BGN: '%' }
@@ -35,12 +35,12 @@ const portfolioSlice = createSlice({
                 btcAcummulated,
                 totalInvested,
                 totalValue,
-                percentageChange } = action.payload.newValues;
+                percentageChange } = action.payload;
 
-            state.current["bitcoin-acumulated"] = btcAcummulated;
-            state.current["total-invested"] = totalInvested;
-            state.current["total-value"] = totalValue;
-            state.current["percent-change"] = percentageChange;
+            state["bitcoin-acumulated"].value = btcAcummulated;
+            state["total-invested"].value = totalInvested;
+            state["total-value"].value = totalValue;
+            state["percent-change"].value = percentageChange;
         }
     },
 });
