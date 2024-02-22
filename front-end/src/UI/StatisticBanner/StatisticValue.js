@@ -3,7 +3,7 @@ import React from 'react';
 export const StatisticValue = React.memo(({ symbol, value }) => {
 
     const formatValue = React.useCallback((value) => {
-        if (symbol === '$') return value.toLocaleString();
+        if (symbol === '$') return Number(value).toLocaleString();
         else return value.toString();
     }, []);
 
