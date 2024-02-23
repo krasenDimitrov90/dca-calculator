@@ -4,6 +4,7 @@ import { Navigation, Statistics, SettingsNavigation, PortfolioChart } from '../.
 
 import { useSelector, useDispatch } from 'react-redux';
 import { portfolioActions } from '../../store/portfolio';
+import { appLoadingActions } from '../../store/loading';
 
 import { subtractYears, sumYears } from '../../utils';
 
@@ -48,12 +49,14 @@ export const Calculator = React.memo(() => {
     const end = sumYears(start, 1);
 
     React.useEffect(() => {
+        dispatch(appLoadingActions.setAppIsLoading(true))
         fetch(BASE_URL + `/bitcoin-history?start=${start}&end=${end}&repetition-period=Monthly`)
             .then(res => res.json())
             .then(data => {
                 console.log(data)
                 let portfolio = calculatePortfolio(data);
                 dispatch(portfolioActions.refreshPortfolio(portfolio));
+                dispatch(appLoadingActions.setAppIsLoading(false));
             })
             .catch(err => {
                 console.log({ err });

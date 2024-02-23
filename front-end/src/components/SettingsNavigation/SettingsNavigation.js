@@ -2,6 +2,7 @@ import React from 'react';
 import './SettingsNavigation.styles.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { portfolioActions } from '../../store/portfolio';
+import { appLoadingActions } from '../../store/loading';
 import { createYearsArray, subtractYears, sumYears } from '../../utils';
 
 import { Button, Input, Select } from '../../UI/index';
@@ -107,12 +108,15 @@ export const SettingsNavigation = React.memo(() => {
             }
         }
 
+        dispatch(appLoadingActions.setAppIsLoading(true))
+
         fetch(BASE_URL + `/bitcoin-history?start=${start}&end=${end}&repetition-period=${reapeatPurchase}`)
             .then(res => res.json())
             .then(data => {
                 let portfolio = calculatePortfolio(data);
                 console.log(data)
                 dispatch(portfolioActions.refreshPortfolio(portfolio));
+                dispatch(appLoadingActions.setAppIsLoading(false))
             })
             .catch(err => {
                 console.log({ err });
