@@ -4,6 +4,8 @@ const bodyparser = require('body-parser');
 const cors = require('cors');
 const fs = require('fs');
 
+// https://dca-calculator-kras-2-b13afe117966.herokuapp.com/ | https://git.heroku.com/dca-calculator-kras-2.git
+
 require('dotenv').config();
 const MONGO_URL = process.env.MONGO_URL;
 
@@ -25,8 +27,8 @@ app.use((error, req, res, next) => {
 
 mongoose.connect(MONGO_URL)
     .then(result => {
-        app.listen(PORT, () => {
+        app.listen(process.env.PORT || PORT, () => {
             console.log(`Server is running, access on http://localhost:${PORT}`);
         })
     })
-    .catch(err => consolr.log({ err }));
+    .catch(err => console.log({ err }));
