@@ -8,7 +8,8 @@ import { appLoadingActions } from '../../store/loading';
 
 import { subtractYears, sumYears } from '../../utils';
 
-const BASE_URL = 'https://dca-calculator-kras-2-b13afe117966.herokuapp.com';
+const BASE_URL = 'https://dca-calculator-kras-7fbdbafd2f5c.herokuapp.com';
+// const BASE_URL = 'https://dca-calculator-kras-2-b13afe117966.herokuapp.com';
 // const BASE_URL = 'http://localhost:8080';
 
 export const Calculator = React.memo(() => {

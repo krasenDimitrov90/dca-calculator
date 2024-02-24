@@ -4,6 +4,8 @@ const bodyparser = require('body-parser');
 const cors = require('cors');
 const fs = require('fs');
 
+const { startBtcSchedule } = require('./scheduler');
+
 // https://dca-calculator-kras-2-b13afe117966.herokuapp.com/ | https://git.heroku.com/dca-calculator-kras-2.git
 
 require('dotenv').config();
@@ -24,6 +26,8 @@ app.use((error, req, res, next) => {
     const message = error.message || 'Something went wrong!';
     res.status(status).json({ message: message });
 })
+
+// startBtcSchedule();
 
 mongoose.connect(MONGO_URL)
     .then(result => {
