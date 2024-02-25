@@ -7,7 +7,8 @@ import { createYearsArray, subtractYears, sumYears } from '../../utils';
 
 import { Button, Input, Select } from '../../UI/index';
 
-const BASE_URL = 'https://dca-calculator-kras-2-b13afe117966.herokuapp.com';
+const BASE_URL = 'https://dca-calculator-kras-7fbdbafd2f5c.herokuapp.com';
+// const BASE_URL = 'https://dca-calculator-kras-2-b13afe117966.herokuapp.com';
 // const BASE_URL = 'http://localhost:8080';
 
 const SELECTTORS = [
