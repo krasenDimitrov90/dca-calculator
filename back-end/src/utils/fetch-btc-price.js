@@ -18,26 +18,30 @@ const getBitcoinPriceHistory = async (vsCurrency) => {
         return formattedData;
     } catch (error) {
         console.error(`Error fetching data for ${vsCurrency}:`, error);
-        return null;
+        return [];
     }
 };
 
 const mergeEuroPrices = async (bitcoinPriceHistory) => {
-    const euroData = await getBitcoinPriceHistory('eur');
+    try {
+        const euroData = await getBitcoinPriceHistory('eur');
 
-    if (euroData) {
-        // Get the exchange rate between Euro and Bulgarian Lev (BGN)
-        const exchangeRate = await getExchangeRate('eur', 'bgn');
+        if (euroData) {
+            // Get the exchange rate between Euro and Bulgarian Lev (BGN)
+            // const exchangeRate = await getExchangeRate('eur', 'bgn');
 
-        // Merge Euro prices into existing data and convert to BGN
-        bitcoinPriceHistory.forEach((entry, index) => {
-            const euroPrice = euroData[index].prices[0].eur;
-            const bgnPrice = euroPrice * 1.96;
-            entry.prices.push({ euro: euroPrice }, { bgn: bgnPrice.toFixed(2) });
-        });
+            // Merge Euro prices into existing data and convert to BGN
+            bitcoinPriceHistory.forEach((entry, index) => {
+                const euroPrice = euroData[index].prices[0].eur;
+                const bgnPrice = euroPrice * 1.96;
+                entry.prices.push({ euro: euroPrice }, { bgn: bgnPrice.toFixed(2) });
+            });
+        }
+
+        return bitcoinPriceHistory;
+    } catch (err) {
+        return [];
     }
-
-    return bitcoinPriceHistory;
 };
 
 const filterPrices = (bitcoinPrices) => {
@@ -60,21 +64,24 @@ const getExchangeRate = async (fromCurrency, toCurrency) => {
         return data.rates[toCurrency];
     } catch (error) {
         console.error(`Error fetching exchange rate from ${fromCurrency} to ${toCurrency}:`, error);
-        return null;
+        return 1;
     }
 };
 
 
 const fetchBitcoinPrice = async () => {
-    const bitcoinPriceHistoryUSD = await getBitcoinPriceHistory('usd');
-    const bitcoinPriceHistoryWithEuro = await mergeEuroPrices(bitcoinPriceHistoryUSD);
-    const filteredPrices = filterPrices(bitcoinPriceHistoryWithEuro);
-    if (bitcoinPriceHistoryWithEuro) {
-        // Output the final formatted data
-        // console.log(JSON.stringify(filteredPrices, null, 2));
-        return filteredPrices;
+    try {
+        const bitcoinPriceHistoryUSD = await getBitcoinPriceHistory('usd');
+        const bitcoinPriceHistoryWithEuro = await mergeEuroPrices(bitcoinPriceHistoryUSD);
+        const filteredPrices = filterPrices(bitcoinPriceHistoryWithEuro);
+        if (bitcoinPriceHistoryWithEuro) {
+            // Output the final formatted data
+            // console.log(JSON.stringify(filteredPrices, null, 2));
+            return filteredPrices;
+        }
+    } catch (err) {
+        return [];
     }
-    return [];
 };
 
 module.exports = fetchBitcoinPrice;
