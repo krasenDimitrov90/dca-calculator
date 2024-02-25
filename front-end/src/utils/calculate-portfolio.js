@@ -1,12 +1,12 @@
-export const calculatePortfolio = (data, currentFiatCurrency, BTC_PRICE) => {
+export const calculatePortfolio = (data, purchaseAmount, currentFiatCurrency, BTC_PRICE) => {
     const portfolio = {
         invested: 0,
         accumulated: 0,
     };
 
     data.reduce((acc, curr) => {
-        acc.accumulated += (50 / curr.prices[currentFiatCurrency]);
-        acc.invested += 50;
+        acc.accumulated += (purchaseAmount / curr.prices[currentFiatCurrency]);
+        acc.invested += purchaseAmount;
         return acc;
     }, portfolio)
 

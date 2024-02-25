@@ -3,13 +3,11 @@ import './SettingsNavigation.styles.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { portfolioActions } from '../../store/portfolio';
 import { appLoadingActions } from '../../store/loading';
-import { createYearsArray, subtractYears, sumYears } from '../../utils';
+import { createYearsArray, subtractYears, sumYears, calculatePortfolio } from '../../utils';
 
 import { Button, Input, Select } from '../../UI/index';
 
-const BASE_URL = 'https://dca-calculator-kras-7fbdbafd2f5c.herokuapp.com';
-// const BASE_URL = 'https://dca-calculator-kras-2-b13afe117966.herokuapp.com';
-// const BASE_URL = 'http://localhost:8080';
+import { api } from '../../hooks/api';
 
 const SELECTTORS = [
     {
@@ -43,7 +41,7 @@ const BTC_PRICE = {
 export const SettingsNavigation = React.memo(() => {
 
     const dispatch = useDispatch();
-    const currency = useSelector(state => state.fiatCurrency.current);
+    const currentFiatCurrency = useSelector(state => state.fiatCurrency.current.toLowerCase());
 
     const formRef = React.useRef(null);
 
@@ -80,47 +78,22 @@ export const SettingsNavigation = React.memo(() => {
         const end = sumYears(start, accumulateFor);
         const reapeatPurchase = data.reapeatPurchase;
         const purchaseAmount = Number(data.purchaseAmount);
-        const currentCurrency = currency.toLowerCase();
-
-        const calculatePortfolio = (data) => {
-            const portfolio = {
-                invested: 0,
-                accumulated: 0,
-            };
 
 
-            data.reduce((acc, curr) => {
-                let value = (purchaseAmount / curr.prices[currentCurrency]);
-                acc.accumulated += (purchaseAmount / curr.prices[currentCurrency]);
-                acc.invested += purchaseAmount;
-                return acc;
-            }, portfolio)
-
-
-            let totalValueOfBitcoinInFiat = portfolio.accumulated * BTC_PRICE[currentCurrency];
-            // Calculate the percenteage of investment (positive or negative)
-            let profit = ((totalValueOfBitcoinInFiat - portfolio.invested) / Math.abs(portfolio.invested)) * 100;
-
-            return {
-                btcAcummulated: portfolio.accumulated.toFixed(5),
-                totalInvested: portfolio.invested.toFixed(0),
-                totalValue: totalValueOfBitcoinInFiat.toFixed(0),
-                percentageChange: profit.toFixed(0),
-            }
-        }
 
         dispatch(appLoadingActions.setAppIsLoading(true))
 
-        fetch(BASE_URL + `/bitcoin-history?start=${start}&end=${end}&repetition-period=${reapeatPurchase}`)
-            .then(res => res.json())
+        api
+            .getBTCHistory(start, end, reapeatPurchase)
             .then(data => {
-                let portfolio = calculatePortfolio(data);
+                let portfolio = calculatePortfolio(data, purchaseAmount, currentFiatCurrency, BTC_PRICE);
                 console.log(data)
                 dispatch(portfolioActions.refreshPortfolio(portfolio));
                 dispatch(appLoadingActions.setAppIsLoading(false))
             })
             .catch(err => {
                 console.log({ err });
+                dispatch(appLoadingActions.setAppIsLoading(false));
             });
     };
 
@@ -135,7 +108,7 @@ export const SettingsNavigation = React.memo(() => {
                     name='purchaseAmount'
                     label='Purchase amount:'
                     type='number'
-                    inputDescription={currency}
+                    inputDescription={currentFiatCurrency}
                     initialValue={50}
                     min={1}
 

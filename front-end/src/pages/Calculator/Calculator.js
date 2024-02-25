@@ -8,9 +8,7 @@ import { appLoadingActions } from '../../store/loading';
 
 import { subtractYears, sumYears, calculatePortfolio } from '../../utils';
 
-const BASE_URL = 'https://dca-calculator-kras-7fbdbafd2f5c.herokuapp.com';
-// const BASE_URL = 'https://dca-calculator-kras-2-b13afe117966.herokuapp.com';
-// const BASE_URL = 'http://localhost:8080';
+import { api } from '../../hooks/api';
 
 export const Calculator = React.memo(() => {
 
@@ -25,14 +23,18 @@ export const Calculator = React.memo(() => {
 
     const start = subtractYears(new Date(), 1);
     const end = sumYears(start, 1);
+    const reapeatPurchase = 'Monthly';
+    const purchaseAmount = 50;
 
     React.useEffect(() => {
-        dispatch(appLoadingActions.setAppIsLoading(true))
-        fetch(BASE_URL + `/bitcoin-history?start=${start}&end=${end}&repetition-period=Monthly`)
-            .then(res => res.json())
+
+        dispatch(appLoadingActions.setAppIsLoading(true));
+        
+        api
+            .getBTCHistory(start, end, reapeatPurchase)
             .then(data => {
                 console.log(data)
-                const portfolio = calculatePortfolio(data,currentFiatCurrency, BTC_PRICE);
+                const portfolio = calculatePortfolio(data, purchaseAmount, currentFiatCurrency, BTC_PRICE);
                 dispatch(portfolioActions.refreshPortfolio(portfolio));
                 dispatch(appLoadingActions.setAppIsLoading(false));
             })
