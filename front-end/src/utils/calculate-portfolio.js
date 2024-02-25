@@ -1,4 +1,6 @@
 export const calculatePortfolio = (data, purchaseAmount, currentFiatCurrency, BTC_PRICE) => {
+    
+    currentFiatCurrency = currentFiatCurrency.toLowerCase();
     const portfolio = {
         invested: 0,
         accumulated: 0,

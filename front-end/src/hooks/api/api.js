@@ -29,7 +29,7 @@ export const getBTCPriceInUSDFromBinance = () => {
 
 export const getBTCPriceInEURFromBinance = () => {
     // const url = `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=eur`;
-    const url = 'https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT';
+    const url = 'https://api.binance.com/api/v3/ticker/price?symbol=BTCEUR';
 
 
     return fetch(url)

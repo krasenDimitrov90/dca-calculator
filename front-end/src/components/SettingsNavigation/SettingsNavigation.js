@@ -33,7 +33,7 @@ const SELECTTORS = [
 export const SettingsNavigation = React.memo(() => {
 
     const dispatch = useDispatch();
-    const currentFiatCurrency = useSelector(state => state.fiatCurrency.current.toLowerCase());
+    const currentFiatCurrency = useSelector(state => state.fiatCurrency.current);
     const BTC_PRICE = useSelector(state => state.bitcoin.prices);
 
     const formRef = React.useRef(null);
