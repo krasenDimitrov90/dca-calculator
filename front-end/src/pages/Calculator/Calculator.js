@@ -44,6 +44,7 @@ export const Calculator = React.memo(() => {
             <Navigation />
 
             <div className='flex flex-col'>
+            <h2>{BTC_PRICE.usd}</h2>
                 <Statistics />
                 <div className='flex flex-col-reverse desktop:flex-row my-app-sm'>
                     <div className='portfolio-left-section-wrapper custom-gradient-secondary'>

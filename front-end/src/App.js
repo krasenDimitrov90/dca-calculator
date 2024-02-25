@@ -17,14 +17,14 @@ const App = () => {
     const prepareBTCPrice = async () => {
         try {
             let btcPrice = {};
-            const btcInUsd = await api.getBTCPriceInUSDFromCoinGeco();
-            const btcInEur = await api.getBTCPriceInEURFromCoinGeco();
-            const btcInBgn = btcInEur * 1.96;
+            const btcInUsd = await api.getBTCPriceInUSDFromBinance();
+            const btcInEur = await api.getBTCPriceInEURFromBinance();
+            const btcInBgn = Number(btcInEur) * 1.96;
 
             btcPrice = {
-                usd: btcInUsd,
-                eur: btcInEur,
-                bgn: btcInBgn,
+                usd: Number(btcInUsd),
+                eur: Number(btcInEur),
+                bgn: Number(btcInBgn),
             }
             return btcPrice;
 
@@ -44,8 +44,8 @@ const App = () => {
                 console.log({ err });
                 const btcPrice = {
                     usd: 50000,
-                    eur: 46207,
-                    bgn: 90422,
+                    eur: 46152,
+                    bgn: 90405,
                 };
                 dispatch(bitcoinActions.setBitcoinPrices(btcPrice));
                 setInit(false);

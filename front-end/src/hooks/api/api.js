@@ -13,26 +13,31 @@ export const getBTCHistory = (start, end, reapeatPurchase) => {
         })
 };
 
-export const getBTCPriceInUSDFromCoinGeco = () => {
-    const url = `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd`;
+export const getBTCPriceInUSDFromBinance = () => {
+    // const url = `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd`;
+    const url = 'https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT';
 
     return fetch(url)
         .then(res => res.json())
-        .then(data => data.bitcoin.usd)
+        .then(data => data.price)
+        // .then(data => data.bitcoin.usd)
         .catch(err => {
-            console.log('IN getBTCHistoryMonthly hook',{err});
+            console.log('IN getBTCPriceInUSDFromCoinGeco',{err});
             return 50000;
         })
 };
 
-export const getBTCPriceInEURFromCoinGeco = () => {
-    const url = `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=eur`;
+export const getBTCPriceInEURFromBinance = () => {
+    // const url = `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=eur`;
+    const url = 'https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT';
+
 
     return fetch(url)
         .then(res => res.json())
-        .then(data => data.bitcoin.eur)
+        .then(data => data.price)
+        // .then(data => data.bitcoin.eur)
         .catch(err => {
-            console.log('IN getBTCHistoryMonthly hook',{err});
+            console.log('IN getBTCPriceInEURFromCoinGeco ',{err});
             return 46152;
         })
 };
