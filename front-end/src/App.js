@@ -55,9 +55,10 @@ const App = () => {
     return (
         <>
             {
+                // Init state is for preventing incorrect calculations from the bitcoin redux slice
+                // if for some reason the calculations start before the response for the current price of BTC
                 !init && 
                     <div className='flex flex-1 relative'>
-                        {/* {appIsLoading && <div className='bg-white fix top-0 left-0'>Loading....</div>} */}
                         {appIsLoading && <div className='bg-black text-white text-app-3xl flex justify-center items-center z-[1060] opacity-[0.5] absolute top-0 left-0 bottom-0 right-0'>Loading....</div>}
                         <Pages.Calculator />
                     </div>

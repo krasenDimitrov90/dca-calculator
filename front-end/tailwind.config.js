@@ -62,6 +62,14 @@ module.exports = {
         'app-lg': '18px',
         'app-xl': '24px',
       },
+      borderWidth: {
+        'app-xs': '1px',
+        'app-s': '2px',
+        'app-sm': '4px',
+        'app-base': '8px',
+        'app-lg': '12px',
+        'app-xl': '16px',
+      },
       height: {
         'app-2xl': '36px',
       },
@@ -71,12 +79,22 @@ module.exports = {
       screens: {
         'tablet': '640px',
         // => @media (min-width: 640px) { ... }
-  
+
         'laptop': '1024px',
         // => @media (min-width: 1024px) { ... }
-  
+
         'desktop': '1280px',
         // => @media (min-width: 1280px) { ... }
+      },
+      flexGrow: {
+        'app-1': '1',
+        'app-2': '2',
+        'app-3': '3',
+      },
+      flexShrink: {
+        'app-1': '1',
+        'app-2': '2',
+        'app-3': '3',
       },
     },
   },
