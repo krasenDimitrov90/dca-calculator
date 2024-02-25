@@ -25,4 +25,5 @@ StatisticBanner.images = {
     USD: '/images/dollar.png',
     CHART: '/images/chart.png',
     ARROW_DOWN: '/images/arrow-down.png',
+    ARROW_UP: '/images/arrow-up.png',
 };

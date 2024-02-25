@@ -21,7 +21,7 @@ const initialState = {
     "percent-change": {
         value: 0,
         label: "Percent change",
-        image: 'ARROW_DOWN',
+        image: ['ARROW_UP', 'ARROW_DOWN'],
         symbols: { USD: '%', EUR: '%', BGN: '%' }
     },
 };
