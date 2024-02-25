@@ -12,14 +12,9 @@ import { api } from '../../hooks/api';
 
 export const Calculator = React.memo(() => {
 
-    const BTC_PRICE = {
-        usd: 50000,
-        eur: 46207,
-        bgn: 90422,
-    };
-
     const dispatch = useDispatch();
     const currentFiatCurrency = useSelector(state => state.fiatCurrency.current.toLowerCase());
+    const BTC_PRICE  = useSelector(state => state.bitcoin.prices);
 
     const start = subtractYears(new Date(), 1);
     const end = sumYears(start, 1);

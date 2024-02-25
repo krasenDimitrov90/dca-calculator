@@ -19,29 +19,22 @@ const SELECTTORS = [
     {
         label: 'Accumulate For',
         name: 'accumulateFor',
-        // options: ['1 Year', '2 Years', '3 Years'],
         options: createYearsArray('primary'),
         onChange: 'acummulateFor',
     },
     {
         label: 'Starting',
         name: 'starting',
-        // options: ['1 Year Ago', '2 Years Ago', '3 Years Ago',],
         options: createYearsArray('secondary'),
         onChange: 'startingFrom',
     }
 ];
 
-const BTC_PRICE = {
-    usd: 50000,
-    eur: 46207,
-    bgn: 90422,
-};
-
 export const SettingsNavigation = React.memo(() => {
 
     const dispatch = useDispatch();
     const currentFiatCurrency = useSelector(state => state.fiatCurrency.current.toLowerCase());
+    const BTC_PRICE = useSelector(state => state.bitcoin.prices);
 
     const formRef = React.useRef(null);
 
