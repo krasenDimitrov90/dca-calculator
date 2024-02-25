@@ -1,16 +1,16 @@
 import React from 'react';
 import './Navigation.styles.css';
 import { Select } from '../../UI/Select/Select';
-import { currencyActions } from '../../store/currency';
+import { fiatCurrencyActions } from '../../store/fiat-currency';
 import { useSelector, useDispatch } from 'react-redux';
 
 export const Navigation = React.memo(() => {
 
     const dispathc = useDispatch();
-    const { current: currency, currencies } = useSelector(state => state.currency);
+    const { current: fiatCurrency, fiatCurrencies } = useSelector(state => state.fiatCurrency);
 
     const onCurruncyChange = (value) => {
-        dispathc(currencyActions.changeCurrency({ currency: value }));
+        dispathc(fiatCurrencyActions.changeCurrency({ currency: value }));
     };
 
     return (
@@ -26,7 +26,7 @@ export const Navigation = React.memo(() => {
             <Select
                 variant={Select.variants.LABEL_LEFT}
                 label='Currency'
-                options={currencies}
+                options={fiatCurrencies}
                 onChange={onCurruncyChange}
             />
         </div>

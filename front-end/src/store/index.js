@@ -1,11 +1,11 @@
-import { createSlice, configureStore } from '@reduxjs/toolkit';
-import currencyReducer from './currency';
+import { configureStore } from '@reduxjs/toolkit';
+import fiatCurrencyReducer from './fiat-currency';
 import portfolioReducer from './portfolio';
 import appLoadingReducer from './loading';
 
 const store = configureStore({
     reducer: {
-        currency: currencyReducer,
+        fiatCurrency: fiatCurrencyReducer,
         portfolio: portfolioReducer,
         appLoading: appLoadingReducer,
     }

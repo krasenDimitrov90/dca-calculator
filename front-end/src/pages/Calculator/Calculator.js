@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { portfolioActions } from '../../store/portfolio';
 import { appLoadingActions } from '../../store/loading';
 
-import { subtractYears, sumYears } from '../../utils';
+import { subtractYears, sumYears, calculatePortfolio } from '../../utils';
 
 const BASE_URL = 'https://dca-calculator-kras-7fbdbafd2f5c.herokuapp.com';
 // const BASE_URL = 'https://dca-calculator-kras-2-b13afe117966.herokuapp.com';
@@ -21,30 +21,7 @@ export const Calculator = React.memo(() => {
     };
 
     const dispatch = useDispatch();
-    const currentCurrency = useSelector(state => state.currency.current.toLowerCase());
-
-    const calculatePortfolio = (data) => {
-        const portfolio = {
-            invested: 0,
-            accumulated: 0,
-        };
-
-        data.reduce((acc, curr) => {
-            acc.accumulated += (50 / curr.prices[currentCurrency]);
-            acc.invested += 50;
-            return acc;
-        }, portfolio)
-
-        let totalValueOfBitcoinInFiat = portfolio.accumulated * BTC_PRICE[currentCurrency];
-        let profit = ((totalValueOfBitcoinInFiat - portfolio.invested) / Math.abs(portfolio.invested)) * 100;
-
-        return {
-            btcAcummulated: portfolio.accumulated.toFixed(5),
-            totalInvested: portfolio.invested.toFixed(0),
-            totalValue: totalValueOfBitcoinInFiat.toFixed(0),
-            percentageChange: profit.toFixed(0),
-        }
-    }
+    const currentFiatCurrency = useSelector(state => state.fiatCurrency.current.toLowerCase());
 
     const start = subtractYears(new Date(), 1);
     const end = sumYears(start, 1);
@@ -55,12 +32,13 @@ export const Calculator = React.memo(() => {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                let portfolio = calculatePortfolio(data);
+                const portfolio = calculatePortfolio(data,currentFiatCurrency, BTC_PRICE);
                 dispatch(portfolioActions.refreshPortfolio(portfolio));
                 dispatch(appLoadingActions.setAppIsLoading(false));
             })
             .catch(err => {
                 console.log({ err });
+                dispatch(appLoadingActions.setAppIsLoading(false));
             });
     }, []);
 

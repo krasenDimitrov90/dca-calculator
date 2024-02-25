@@ -43,7 +43,7 @@ const BTC_PRICE = {
 export const SettingsNavigation = React.memo(() => {
 
     const dispatch = useDispatch();
-    const currency = useSelector(state => state.currency.current);
+    const currency = useSelector(state => state.fiatCurrency.current);
 
     const formRef = React.useRef(null);
 

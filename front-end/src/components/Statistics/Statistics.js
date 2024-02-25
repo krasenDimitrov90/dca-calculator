@@ -8,7 +8,7 @@ import { StatisticBanner } from '../../UI';
 export const Statistics = React.memo(() => {
 
     const portfolio = useSelector(state => state.portfolio);
-    const currency = useSelector(state => state.currency.current);
+    const currency = useSelector(state => state.fiatCurrency.current);
 
     return (
         <div className='flex flex-col desktop:flex-row my-app-sm '>
