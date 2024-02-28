@@ -2,6 +2,7 @@ import React from 'react';
 import './InvestmentsHistoryTable.styles.css';
 
 import { createInvestmentHistory } from '../../utils/create-investment-history';
+import { useSelector } from 'react-redux';
 
 const Row = ({
     date,
@@ -11,6 +12,13 @@ const Row = ({
     balance,
 }) => {
 
+    const currentFiatCurrency = useSelector(state => state.fiatCurrency.current);
+
+    const leftSymbols = { USD: '$', EUR: '€'};
+    const rightSymbols = { BGN: 'lv' };
+    const leftSymbol = leftSymbols[currentFiatCurrency] || '';
+    const rightSymbol = rightSymbols[currentFiatCurrency] || '';
+
     const btcPriceString = Number(btcPrice).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     const btcPurchasedString = btcPurchased.toFixed(6);
     const balanceString = Number(balance).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -18,10 +26,10 @@ const Row = ({
     return (
         <tr>
             <td data-label="Date">{date}</td>
-            <td data-label="Btc price">${btcPriceString}</td>
+            <td data-label="Btc price">{leftSymbol}{btcPriceString} {rightSymbol}</td>
             <td data-label="Btc purchased">{btcPurchasedString}</td>
-            <td data-label="Total Cost">${totalCost}</td>
-            <td data-label="Balance">${balanceString}</td>
+            <td data-label="Total Cost">{leftSymbol}{totalCost} {rightSymbol}</td>
+            <td data-label="Balance">{leftSymbol}{balanceString} {rightSymbol}</td>
         </tr>
     );
 };
