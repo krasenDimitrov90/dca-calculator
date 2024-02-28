@@ -5,7 +5,7 @@
 .portfolio-left-section-wrapper {
     @apply flex h-[410px] bg-app-purple rounded-app-s desktop:mr-app-sm mt-app-sm desktop:mt-0;
     @apply desktop:grow-app-3 desktop:shrink-app-3;
-    @apply overflow-x-scroll p-app-lg;
+    @apply p-app-lg;
 
     /* This come from the index.css file :root */
     @apply desktop:basis-[calc(4_*_var(--basis-app-sm))];;

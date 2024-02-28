@@ -1,1 +1,1 @@
-export * from './getBitcoinPrice';
+export * from './getBitcoinPriceLive';

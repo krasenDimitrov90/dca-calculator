@@ -22,3 +22,12 @@ export const getFromToDates = () => {
 export const formatDateAsIsoString = (date) => {
     return date.toISOString();
 };
+
+export const formatDateAsLocalString = (dateString) => {
+    const dateObj = new Date(dateString);
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    const formattedDate = dateObj.toLocaleDateString('en-GB', options);
+
+    // DD/MM/YYYY
+    return formattedDate;
+};

@@ -2,7 +2,6 @@ import React from 'react';
 import './InvestmentsHistoryTable.styles.css';
 
 import { createInvestmentHistory } from '../../utils/create-investment-history';
-import { useSelector } from 'react-redux';
 
 const Row = ({
     date,
@@ -10,9 +9,8 @@ const Row = ({
     btcPurchased,
     totalCost,
     balance,
+    currentFiatCurrency
 }) => {
-
-    const currentFiatCurrency = useSelector(state => state.fiatCurrency.current);
 
     const leftSymbols = { USD: '$', EUR: '€'};
     const rightSymbols = { BGN: 'lv' };
@@ -35,7 +33,6 @@ const Row = ({
 };
 
 export const InvestmentsHistoryTable = React.memo(({ historyData, purchaseAmount, currentFiatCurrency }) => {
-    console.log({ currentFiatCurrency })
     const investmentHistory = createInvestmentHistory(historyData, purchaseAmount, currentFiatCurrency.toLowerCase());
 
     return (
@@ -61,6 +58,7 @@ export const InvestmentsHistoryTable = React.memo(({ historyData, purchaseAmount
                                     btcPurchased={investment.btcPurchased}
                                     totalCost={investment.totalCost}
                                     balance={investment.balance}
+                                    currentFiatCurrency={currentFiatCurrency}
                                 />
                             );
                         })
