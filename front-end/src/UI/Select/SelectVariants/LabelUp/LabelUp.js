@@ -9,7 +9,7 @@ export const LabelUp = React.memo(({ label, name, options, onChange }) => {
 
     const handleChange = (event) => {
         setSelectedValue(event.target.value);
-        onChange(event.target.value);
+        // onChange(event.target.value);
     };
 
     return (
@@ -18,8 +18,8 @@ export const LabelUp = React.memo(({ label, name, options, onChange }) => {
             <div className="relative flex">
                 <select
                     name={name}
-                    value={selectedValue}
-                    onChange={handleChange}
+                    // value={selectedValue}
+                    // onChange={handleChange}
                     className="appearance-none flex-1 bg-app-purple h-app-2xl w-[100px] cursor-pointer rounded p-app-xs pr-10 pl-2 text-white outline-none"
                 >
                     {options.map(option => {
