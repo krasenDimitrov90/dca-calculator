@@ -22,6 +22,7 @@ export const Input = React.memo(({ initialValue, label, name, min, inputDescript
             <div className='flex'>
                 <input onChange={onChange} value={value} name={name} min={min}
                     className='app-input'
+                    inputmode="numeric" pattern="[0-9]*"
                 />
                 <div className='py-app-s px-app-sm bg-app-purple-third font-bold text-app-text-secondary rounded-r-app-s flex justify-center'>
                     <p>{inputDescription}</p>
