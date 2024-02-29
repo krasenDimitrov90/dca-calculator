@@ -14,33 +14,24 @@ const App = () => {
 
     const appIsLoading = useSelector(state => state.appLoading.appIsLoading);
 
-    const prepareBTCPrice = async () => {
-        try {
-            let btcPrice = {};
-            const btcInUsd = await getBTCPriceInUSDFromBinance();
-            const btcInEur = await getBTCPriceInEURFromBinance();
-            const btcInBgn = Number(btcInEur) * 1.96;
-
-            btcPrice = {
-                usd: Number(btcInUsd),
-                eur: Number(btcInEur),
-                bgn: Number(btcInBgn),
-            }
-            return btcPrice;
-
-        } catch (err) {
-            throw new Error('There is problem with coingecko');
-        }
-
-    };
-
     React.useEffect(() => {
-        prepareBTCPrice()
-            .then(data => {
-                dispatch(bitcoinActions.setBitcoinPrices(data));
+        const prepareBTCPrice = async () => {
+            try {
+                let btcPrice = {};
+                const btcInUsd = await getBTCPriceInUSDFromBinance();
+                const btcInEur = await getBTCPriceInEURFromBinance();
+                const btcInBgn = Number(btcInEur) * 1.96;
+    
+                btcPrice = {
+                    usd: Number(btcInUsd),
+                    eur: Number(btcInEur),
+                    bgn: Number(btcInBgn),
+                }
+                dispatch(bitcoinActions.setBitcoinPrices(btcPrice));
                 setInit(false);
-            })
-            .catch(err => {
+    
+            } catch (err) {
+                console.log('There is problem with binance');
                 const btcPrice = {
                     usd: 50000,
                     eur: 46152,
@@ -48,7 +39,10 @@ const App = () => {
                 };
                 dispatch(bitcoinActions.setBitcoinPrices(btcPrice));
                 setInit(false);
-            })
+            }
+    
+        };
+        prepareBTCPrice();
     }, []);
 
     return (

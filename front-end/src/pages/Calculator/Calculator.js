@@ -15,8 +15,7 @@ export const Calculator = React.memo(() => {
 
     const dispatch = useDispatch();
     const currentFiatCurrency = useSelector(state => state.fiatCurrency.current);
-    const appIsLoading = useSelector(state => state.appLoading.appIsLoading);
-    const BTC_PRICE = useSelector(state => state.bitcoin.prices);
+    const currentBTCPrice = useSelector(state => state.bitcoin.prices);
 
     const start = subtractYears(new Date(), 1);
     const end = sumYears(start, 1);
@@ -43,17 +42,15 @@ export const Calculator = React.memo(() => {
             endDate: end,
         } = investmentData;
 
-        dispatch(appLoadingActions.setAppIsLoading(true));
         const fetchBtcHistory = async () => {
-            console.log({ appIsLoading });
-
+            dispatch(appLoadingActions.setAppIsLoading(true));
             try {
                 const btcHistory = await getBTCHistory(start, end, repeatPurchase);
                 console.log({ btcHistory })
 
-                const portfolio = calculatePortfolio(btcHistory, purchaseAmount, currentFiatCurrency, BTC_PRICE);
+                const portfolio = calculatePortfolio(btcHistory, purchaseAmount, currentFiatCurrency, currentBTCPrice);
                 dispatch(portfolioActions.refreshPortfolio(portfolio));
-                dispatch(appLoadingActions.setAppIsLoading(false));
+                // dispatch(appLoadingActions.setAppIsLoading(false));
                 setHistoryData(btcHistory);
 
             } catch (err) {
@@ -72,7 +69,7 @@ export const Calculator = React.memo(() => {
 
             <AssetPriceValue
                 fiatCurrency={currentFiatCurrency}
-                assetPrice={BTC_PRICE[currentFiatCurrency.toLowerCase()]}
+                assetPrice={currentBTCPrice[currentFiatCurrency.toLowerCase()]}
             />
 
             <div className='flex flex-col'>

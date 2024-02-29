@@ -1,4 +1,5 @@
-const BASE_URL = 'http://localhost:8080';
+const BASE_URL = 'http://192.168.100.6:8080';
+// const BASE_URL = 'http://localhost:8080';
 
 export const getBTCHistory = async (start, end, reapeatPurchase) => {
     const endPoint = `/bitcoin-history?start=${start}&end=${end}&repetition-period=${reapeatPurchase}`;

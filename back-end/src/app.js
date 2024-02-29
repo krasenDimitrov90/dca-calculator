@@ -31,8 +31,8 @@ app.use((error, req, res, next) => {
 
 mongoose.connect(MONGO_URL)
     .then(result => {
-        app.listen(process.env.PORT || PORT, () => {
-            console.log(`Server is running, access on http://localhost:${PORT}`);
+        app.listen(process.env.PORT || PORT, '192.168.100.6', () => {
+            console.log(`Server is running, access on http://192.168.100.6:${PORT}`);
         })
     })
     .catch(err => console.log({ err }));

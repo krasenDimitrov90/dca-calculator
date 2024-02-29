@@ -8,7 +8,11 @@ const btcSchedule = cron.schedule('0 0 0 * * *', async () => {
     let btcPrices = [];
     try {
         btcPrices = await fetchBitcoinPrice();
-        console.log({ btcPrices });
+        // const btcPrices = [{ date: '28/02/2024', prices: [{ usd: '61185.65' }, { euro: '56474.05' }, { bgn: '110431.23' }] }];
+        // console.log({ btcPrices });
+        // btcPrices.map(({ date, prices }) => {
+        //     console.log({ date, prices });
+        // })
 
         const formatedBtcPrices = btcPrices.map(parseInputDataItemAndDateFormat);
         formatedBtcPrices.map(({ date, prices }) => {
