@@ -10,13 +10,16 @@
     }
 
     tr {
-        @apply text-app-text-secondary px-app-xs;
+        @apply text-app-text-secondary px-app-xs cursor-pointer;
         @apply desktop:sticky desktop:top-0;
+    }
+    tr:hover {
+        @apply bg-app-purple transition-all ease-in-out duration-150;
     }
 
     th,
     td {
-        @apply border-b border-b-app-text-secondary p-app-sm text-center;
+        @apply border-b border-b-app-purple-forth p-app-sm text-center;
     }
 
     th {
@@ -35,11 +38,11 @@
         }
 
         tr {
-            @apply border border-app-text-secondary block mb-app-sm;
+            @apply border border-app-purple-forth block mb-app-sm;
         }
 
         td {
-            @apply border-b border-b-app-text-secondary;
+            @apply border-b border-b-app-purple-forth;
             display: block;
             font-size: .8em;
             text-align: right;

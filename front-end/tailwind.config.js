@@ -12,6 +12,7 @@ module.exports = {
         'app-purple': "#383B6D",
         'app-purple-secondary': '#282A51',
         'app-purple-third': '#444788',
+        'app-purple-forth': '#35376A',
         'app-blue-primary': '#737CD9',
         'app-bluepurple-primary': '#4834d4',
       },
