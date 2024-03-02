@@ -1,14 +1,16 @@
 import React from 'react';
+import { formatNumberWithSuffixAndCommas } from '../../utils/format-numbers';
 
 export const StatisticValue = React.memo(({ symbol, value }) => {
 
     const formatValue = React.useCallback((value) => {
-        if (symbol === '$') return Number(value).toLocaleString();
-        else return value.toString();
+        if (symbol === '%') return value.toString();
+        else return formatNumberWithSuffixAndCommas(value);
     }, []);
 
     const formatedValue = formatValue(value);
 
+    
     return (
         <div>
             {(symbol === '$' || symbol === '€') &&
