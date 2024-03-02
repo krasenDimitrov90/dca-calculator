@@ -13,7 +13,7 @@ const Row = ({
 }) => {
 
     const leftSymbols = { USD: '$', EUR: '€'};
-    const rightSymbols = { BGN: 'lv' };
+    const rightSymbols = { BGN: 'BGN' };
     const leftSymbol = leftSymbols[currentFiatCurrency] || '';
     const rightSymbol = rightSymbols[currentFiatCurrency] || '';
 
@@ -24,10 +24,10 @@ const Row = ({
     return (
         <tr>
             <td data-label="Date">{date}</td>
-            <td data-label="Btc price">{leftSymbol}{btcPriceString} {rightSymbol}</td>
+            <td data-label="Btc price">{leftSymbol}{btcPriceString} <span className='currency-right-symbol'>{rightSymbol}</span></td>
             <td data-label="Btc purchased">{btcPurchasedString}</td>
-            <td data-label="Total Cost">{leftSymbol}{totalCost} {rightSymbol}</td>
-            <td data-label="Balance">{leftSymbol}{balanceString} {rightSymbol}</td>
+            <td data-label="Total Cost">{leftSymbol}{totalCost} <span className='currency-right-symbol'>{rightSymbol}</span></td>
+            <td data-label="Balance">{leftSymbol}{balanceString} <span className='currency-right-symbol'>{rightSymbol}</span></td>
         </tr>
     );
 };

@@ -3,7 +3,7 @@ import React from 'react';
 export const AssetPriceValue = React.memo(({ fiatCurrency, assetPrice }) => {
 
     const currencieLogos = {
-        USD: '$', EUR: '€', BGN: 'lv'
+        USD: '$', EUR: '€', BGN: 'BGN'
     };
 
     const value = (Number(assetPrice.toFixed(2))).toLocaleString();
@@ -13,8 +13,8 @@ export const AssetPriceValue = React.memo(({ fiatCurrency, assetPrice }) => {
             <p className='text-app-text-primary text-app-xl'>
                 <span>BTC/{fiatCurrency} </span>
                 {fiatCurrency !== 'BGN' && <span className='text-[#6BCFB6]'>{currencieLogos[fiatCurrency]}</span>}
-                <span className='text-[#6BCFB6]'>{value}</span>
-                {fiatCurrency === 'BGN' && <span className='text-[#6BCFB6]'>{currencieLogos[fiatCurrency]}</span>}
+                <span className='text-[#6BCFB6]'>{value} </span>
+                {fiatCurrency === 'BGN' && <span className='text-app-lg text-[#6BCFB6]'>{currencieLogos[fiatCurrency]}</span>}
             </p>
         </div>
     );

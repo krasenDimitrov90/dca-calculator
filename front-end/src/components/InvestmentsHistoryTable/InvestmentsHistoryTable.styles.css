@@ -5,6 +5,10 @@
 .portfolio-table {
     @apply border-collapse m-0 p-0 w-full table-fixed;
 
+    .currency-right-symbol {
+        @apply text-app-sm;
+    }
+
     thead {
         @apply desktop:sticky desktop:top-0 z-10;
     }

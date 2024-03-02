@@ -18,7 +18,10 @@ export const StatisticValue = React.memo(({ symbol, value }) => {
             <span className='font-app-font-family-primary text-app-text-primary text-app-xl'>
                 {formatedValue}
             </span>
-            {(symbol === '%' || symbol === 'BGN') && <span className='font-app-font-family-primary text-app-text-primary text-app-xl ml-app-xs'>
+            {(symbol === '%') && <span className='font-app-font-family-primary text-app-text-primary text-app-xl ml-app-xs'>
+                {symbol}
+            </span>}
+            {(symbol === 'BGN') && <span className='font-app-font-family-primary text-app-text-primary text-app-sm ml-app-xs'>
                 {symbol}
             </span>}
         </div>
