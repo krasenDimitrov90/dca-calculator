@@ -13,7 +13,6 @@ const MyFetch = async (...args) => {
     try {
         const response = await fetch(resource, config);
         const result = await response.json();
-        console.log({ result })
         if (!response.ok) {
             throw new Error('Response not so OK!')
         }

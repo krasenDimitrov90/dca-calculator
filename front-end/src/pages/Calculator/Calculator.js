@@ -1,17 +1,14 @@
 import React from 'react';
 import './Calculator.styles.css';
 import { InvestmentsHistoryTable, Navigation, SettingsNavigation, Statistics } from '../../components/index';
-import { AssetPriceValue } from '../../UI';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { portfolioActions } from '../../store/portfolio';
+import { useSelector } from 'react-redux';
 
-import { subtractYears, sumYears, calculatePortfolio } from '../../utils';
+import { subtractYears, sumYears } from '../../utils';
 import { BitcoinService } from '../../services/BitcoinService';
 
 export const Calculator = React.memo(() => {
 
-    const dispatch = useDispatch();
     const currentFiatCurrency = useSelector(state => state.fiatCurrency.current);
     const currentBTCPrice = useSelector(state => state.bitcoin.prices);
 
@@ -35,16 +32,12 @@ export const Calculator = React.memo(() => {
     const fetchBtcHistory = async (data) => {
         let {
             repeatPurchase,
-            purchaseAmount,
             startDate: start,
             endDate: end,
         } = data;
 
         try {
             const btcHistory = await BitcoinService.getHistory(start, end, repeatPurchase);
-            const portfolio = calculatePortfolio(btcHistory, purchaseAmount, currentFiatCurrency, currentBTCPrice);
-            dispatch(portfolioActions.refreshPortfolio(portfolio));
-            // dispatch(appLoadingActions.setAppIsLoading(false));
             setHistoryData(btcHistory);
 
         } catch (err) {
@@ -61,10 +54,11 @@ export const Calculator = React.memo(() => {
         <div className='container'>
             <Navigation currentFiatCurrency={currentFiatCurrency} currentBTCPrice={currentBTCPrice} />
 
-
-
             <div className='flex flex-col'>
-                <Statistics />
+                <Statistics 
+                    btcHistory={historyData}
+                    purchaseAmount={investmentData.purchaseAmount}
+                />
                 <div className='flex flex-col-reverse desktop:flex-row my-app-sm'>
                     <div className='portfolio-left-section-wrapper custom-gradient-secondary'>
                         <InvestmentsHistoryTable

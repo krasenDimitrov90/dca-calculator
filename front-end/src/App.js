@@ -23,12 +23,6 @@ const App = () => {
             const btcInEur = await BitcoinService.getBTCPrice('EUR')
             const btcInBgn = Number(btcInEur.price) * 1.96;
 
-            console.log({
-                btcInUsd,
-                btcInEur,
-                btcInBgn
-            })
-
             btcPrice = {
                 usd: Number(btcInUsd.price),
                 eur: Number(btcInEur.price),

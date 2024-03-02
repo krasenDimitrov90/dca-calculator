@@ -4,11 +4,56 @@ import './Statistics.styles.css';
 import { useSelector } from 'react-redux';
 import { StatisticBanner } from '../../UI';
 
+import { calculatePortfolio } from '../../utils';
 
-export const Statistics = React.memo(() => {
+const initialState = {
+    "bitcoin-acumulated": {
+        value: 0,
+        label: "Bitcoin acumulated",
+        image: 'BTC',
+    },
+    "total-invested": {
+        value: 0,
+        label: "Total invested",
+        image: 'USD',
+        symbols: { USD: '$', EUR: '€', BGN: 'BGN' }
+    },
+    "total-value": {
+        value: 0,
+        label: "Total value",
+        image: 'CHART',
+        symbols: { USD: '$', EUR: '€', BGN: 'BGN' }
+    },
+    "percent-change": {
+        value: 0,
+        label: "Percent change",
+        image: ['ARROW_UP', 'ARROW_DOWN'],
+        symbols: { USD: '%', EUR: '%', BGN: '%' }
+    },
+};
 
-    const portfolio = useSelector(state => state.portfolio);
+export const Statistics = React.memo(({ btcHistory, purchaseAmount }) => {
+
+    const [portfolio, setPortfolio] = React.useState(initialState);
     const currency = useSelector(state => state.fiatCurrency.current);
+
+    React.useEffect(() => {
+        setPortfolio(curr => {
+            const {
+                btcAcummulated,
+                totalInvested,
+                totalValue,
+                percentageChange, } = calculatePortfolio(btcHistory, purchaseAmount);
+            const newState = {
+                "bitcoin-acumulated": { ...curr["bitcoin-acumulated"], value: btcAcummulated },
+                "total-invested": { ...curr["total-invested"], value: totalInvested },
+                "total-value": { ...curr["total-value"], value: totalValue },
+                "percent-change": { ...curr["percent-change"], value: percentageChange },
+            };
+
+            return newState;
+        });
+    }, [currency, btcHistory]);
 
     return (
         <div className='flex flex-col desktop:flex-row my-app-sm '>

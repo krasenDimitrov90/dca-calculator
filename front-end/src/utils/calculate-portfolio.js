@@ -1,6 +1,17 @@
-export const calculatePortfolio = (data, purchaseAmount, currentFiatCurrency, BTC_PRICE) => {
-    
-    currentFiatCurrency = currentFiatCurrency.toLowerCase();
+import store from "../store";
+
+export const calculatePortfolio = (data, purchaseAmount) => {
+    if (data.length === 0) return {
+        btcAcummulated: 0,
+        totalInvested: 0,
+        totalValue: 0,
+        percentageChange: 0,
+    };
+
+    let currentFiatCurrency = store.getState().fiatCurrency.current.toLowerCase();
+
+    const BTC_PRICE = store.getState().bitcoin.prices[currentFiatCurrency];
+
     const portfolio = {
         invested: 0,
         accumulated: 0,
@@ -12,7 +23,7 @@ export const calculatePortfolio = (data, purchaseAmount, currentFiatCurrency, BT
         return acc;
     }, portfolio)
 
-    let totalValueOfBitcoinInFiat = portfolio.accumulated * BTC_PRICE[currentFiatCurrency];
+    let totalValueOfBitcoinInFiat = portfolio.accumulated * BTC_PRICE;
     let profit = ((totalValueOfBitcoinInFiat - portfolio.invested) / Math.abs(portfolio.invested)) * 100;
 
     return {
