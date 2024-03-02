@@ -5,11 +5,9 @@ import { AssetPriceValue } from '../../UI';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { portfolioActions } from '../../store/portfolio';
-import { appLoadingActions } from '../../store/loading';
 
 import { subtractYears, sumYears, calculatePortfolio } from '../../utils';
-
-import { getBTCHistory } from '../../services/bitcoinHttps';
+import { BitcoinService } from '../../services/BitcoinService';
 
 export const Calculator = React.memo(() => {
 
@@ -28,49 +26,42 @@ export const Calculator = React.memo(() => {
         endDate: end,
     });
 
-    const handleInvestmentData = React.useCallback((newData) => {
+    const handleOnChange = React.useCallback((newData) => {
         setInvestmentData(newData);
+        fetchBtcHistory(newData)
     }, []);
 
 
-    React.useEffect(() => {
-
+    const fetchBtcHistory = async (data) => {
         let {
             repeatPurchase,
             purchaseAmount,
             startDate: start,
             endDate: end,
-        } = investmentData;
+        } = data;
 
-        const fetchBtcHistory = async () => {
-            dispatch(appLoadingActions.setAppIsLoading(true));
-            try {
-                const btcHistory = await getBTCHistory(start, end, repeatPurchase);
-                console.log({ btcHistory })
+        try {
+            const btcHistory = await BitcoinService.getHistory(start, end, repeatPurchase);
+            const portfolio = calculatePortfolio(btcHistory, purchaseAmount, currentFiatCurrency, currentBTCPrice);
+            dispatch(portfolioActions.refreshPortfolio(portfolio));
+            // dispatch(appLoadingActions.setAppIsLoading(false));
+            setHistoryData(btcHistory);
 
-                const portfolio = calculatePortfolio(btcHistory, purchaseAmount, currentFiatCurrency, currentBTCPrice);
-                dispatch(portfolioActions.refreshPortfolio(portfolio));
-                // dispatch(appLoadingActions.setAppIsLoading(false));
-                setHistoryData(btcHistory);
+        } catch (err) {
+            console.log({ err });
+        }
+    };
 
-            } catch (err) {
-                console.log({ err });
-            }
-            dispatch(appLoadingActions.setAppIsLoading(false));
-        };
-        fetchBtcHistory();
-
-    }, [investmentData]);
+    React.useEffect(() => {        
+        fetchBtcHistory(investmentData);
+    }, []);
 
 
     return (
         <div className='container'>
-            <Navigation />
+            <Navigation currentFiatCurrency={currentFiatCurrency} currentBTCPrice={currentBTCPrice} />
 
-            <AssetPriceValue
-                fiatCurrency={currentFiatCurrency}
-                assetPrice={currentBTCPrice[currentFiatCurrency.toLowerCase()]}
-            />
+
 
             <div className='flex flex-col'>
                 <Statistics />
@@ -86,7 +77,7 @@ export const Calculator = React.memo(() => {
                         <SettingsNavigation
                             currentFiatCurrency={currentFiatCurrency}
                             investmentData={investmentData}
-                            handleInvestmentData={handleInvestmentData}
+                            onChange={handleOnChange}
                         />
                     </div>
                 </div>

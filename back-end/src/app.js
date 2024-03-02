@@ -3,12 +3,14 @@ const mongoose = require('mongoose');
 const bodyparser = require('body-parser');
 const cors = require('cors');
 const fs = require('fs');
+const functions = require('firebase-functions');
 
 const { startBtcSchedule } = require('./scheduler');
 
 // https://dca-calculator-kras-2-b13afe117966.herokuapp.com/ | https://git.heroku.com/dca-calculator-kras-2.git
 
 require('dotenv').config();
+// const MONGO_URL = functions.config().mongo.url;
 const MONGO_URL = process.env.MONGO_URL;
 
 const routes = require('./routes/routes');
@@ -29,10 +31,24 @@ app.use((error, req, res, next) => {
 
 // startBtcSchedule();
 
+// mongoose.connect(MONGO_URL)
+//     .then(result => {
+//         app.listen(process.env.PORT || PORT, '192.168.100.6', () => {
+//             console.log(`Server is running, access on http://192.168.100.6:${PORT}`);
+//         })
+//     })
+//     .catch(err => {
+//         console.log({ err })
+//     });
+
 mongoose.connect(MONGO_URL)
     .then(result => {
-        app.listen(process.env.PORT || PORT, '192.168.100.6', () => {
+        app.listen(process.env.PORT || PORT, () => {
             console.log(`Server is running, access on http://192.168.100.6:${PORT}`);
         })
     })
-    .catch(err => console.log({ err }));
+    .catch(err => {
+        console.log({ err })
+    });
+
+module.exports.api = functions.https.onRequest(app);

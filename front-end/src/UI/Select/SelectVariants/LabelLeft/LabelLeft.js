@@ -13,7 +13,7 @@ export const LabelLeft = React.memo(({ label, options, onChange }) => {
     };
 
     return (
-        <div>
+        <div className='items-center flex'>
             <span className="mr-2 text-white">{label}</span>
             <div className="relative inline-block">
                 <select

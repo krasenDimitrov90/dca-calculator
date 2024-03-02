@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const appLoadingSlice = createSlice({
     name: 'appLoading',
-    initialState: { appIsLoading: false },
+    initialState: { appIsLoading: true },
     reducers: {
         setAppIsLoading(state, action) {
             state.appIsLoading = action.payload;

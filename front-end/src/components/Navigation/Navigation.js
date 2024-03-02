@@ -3,8 +3,9 @@ import './Navigation.styles.css';
 import { Select } from '../../UI/Select/Select';
 import { fiatCurrencyActions } from '../../store/fiat-currency';
 import { useSelector, useDispatch } from 'react-redux';
+import { AssetPriceValue } from '../../UI';
 
-export const Navigation = React.memo(() => {
+export const Navigation = React.memo(({currentFiatCurrency, currentBTCPrice}) => {
 
     const dispathc = useDispatch();
     const { current: fiatCurrency, fiatCurrencies } = useSelector(state => state.fiatCurrency);
@@ -14,7 +15,7 @@ export const Navigation = React.memo(() => {
     };
 
     return (
-        <div className='flex flex-col desktop:flex-row justify-between text-app-text-primary py-app-base'>
+        <div className='flex flex-col desktop:flex-row justify-between text-app-text-primary py-s'>
             <div className='flex items-end py-app-xs'>
                 <div className='flex items-end h-full gap-[6px] py-[3px] mr-app-base'>
                     <span className='flex bg-app-blue-primary h-[25%] w-[3px] rounded'></span>
@@ -23,6 +24,10 @@ export const Navigation = React.memo(() => {
                 </div>
                 <h3 className='text-app-xl'>Dollar Cost Average</h3>
             </div>
+            <AssetPriceValue
+                fiatCurrency={currentFiatCurrency}
+                assetPrice={currentBTCPrice[currentFiatCurrency.toLowerCase()]}
+            />
             <Select
                 variant={Select.variants.LABEL_LEFT}
                 label='Currency'

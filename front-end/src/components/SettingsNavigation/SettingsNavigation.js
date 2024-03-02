@@ -27,7 +27,7 @@ const SELECTTORS = [
 
 
 export const SettingsNavigation = React.memo(({
-    currentFiatCurrency, investmentData, handleInvestmentData
+    currentFiatCurrency, investmentData, onChange
 }) => {
 
     const formRef = React.useRef(null);
@@ -44,7 +44,7 @@ export const SettingsNavigation = React.memo(({
         const repeatPurchase = data.repeatPurchase;
         const purchaseAmount = Number(data.purchaseAmount);
 
-        handleInvestmentData({
+        onChange({
             repeatPurchase,
             purchaseAmount,
             startDate: start,
