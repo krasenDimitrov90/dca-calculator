@@ -5,6 +5,7 @@ export const StatisticValue = React.memo(({ symbol, value }) => {
 
     const formatValue = React.useCallback((value) => {
         if (symbol === '%') return value.toString();
+        else if (!symbol) return value < 1 ? Number(value).toFixed(6) : Number(value).toFixed(2);
         else return formatNumberWithSuffixAndCommas(value);
     }, []);
 
