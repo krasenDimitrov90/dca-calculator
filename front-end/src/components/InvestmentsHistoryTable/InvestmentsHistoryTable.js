@@ -18,13 +18,8 @@ const Row = ({
     const leftSymbol = leftSymbols[currentFiatCurrency] || '';
     const rightSymbol = rightSymbols[currentFiatCurrency] || '';
 
-    // const btcPriceString = Number(btcPrice).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    // const btcPurchasedString = btcPurchased.toFixed(6);
-    // const balanceString = Number(balance).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-
     const formatedBtcPrice = formatNumberWithSuffixAndCommas(btcPrice);
-    const formatedBtcPurchased = formatNumberWithSuffixAndCommas(btcPurchased);
+    const formatedBtcPurchased = btcPurchased < 1 ? Number(btcPurchased).toFixed(6): Number(btcPurchased).toFixed(2);
     const formatedBalance = formatNumberWithSuffixAndCommas(balance);
     const formatedTotalCost = formatNumberWithSuffixAndCommas(totalCost);
 

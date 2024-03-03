@@ -1,5 +1,5 @@
 export function formatNumberWithSuffixAndCommas(number) {
-    if (number < 1000000) return Number(number).toLocaleString();
+    if (number < 1000000) return Number(number).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     
     if (isNaN(number)) {
         return "Invalid input";

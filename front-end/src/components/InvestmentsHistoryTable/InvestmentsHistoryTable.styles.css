@@ -13,8 +13,8 @@
         @apply desktop:sticky desktop:top-0 z-10;
     }
 
-    tr {
-        @apply text-app-text-secondary px-app-xs cursor-pointer;
+    tr{
+        @apply text-app-text-secondary px-app-xs;
         @apply desktop:sticky desktop:top-0;
     }
     tr:hover {

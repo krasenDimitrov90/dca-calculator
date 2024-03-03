@@ -7,6 +7,9 @@
 
 }
 
-.btn-main:hover {
+.btn-main:hover:enabled {
     background-position: left;
+}
+.btn-main:disabled {
+    @apply opacity-50 cursor-not-allowed;
 }

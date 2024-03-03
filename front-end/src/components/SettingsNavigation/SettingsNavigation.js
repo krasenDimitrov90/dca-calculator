@@ -31,6 +31,18 @@ export const SettingsNavigation = React.memo(({
 }) => {
 
     const formRef = React.useRef(null);
+    const [purchaseAmount, setPurchaseAmount] = React.useState(investmentData.purchaseAmount);
+
+    const onPurchaseAmountChange = React.useCallback((e) => {
+        let inputValue = e.target.value;
+        // Remove non-digit characters using a regular expression
+        inputValue = inputValue.replace(/\D/g, '');
+
+        if (inputValue.startsWith(0)) return;
+        if (inputValue.length > 10) return;
+
+        setPurchaseAmount(inputValue);
+    }, []);
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -65,7 +77,8 @@ export const SettingsNavigation = React.memo(({
                     type='number'
                     inputDescription={currentFiatCurrency}
                     initialValue={investmentData.purchaseAmount}
-                    min={1}
+                    value={purchaseAmount}
+                    onChange={onPurchaseAmountChange}
 
                 />
                 {
@@ -83,6 +96,7 @@ export const SettingsNavigation = React.memo(({
                 }
                 <Button
                     onClick={submitHandler}
+                    disabled={Number(purchaseAmount) < 1}
                 >
                     CALCULATE
                 </Button>
