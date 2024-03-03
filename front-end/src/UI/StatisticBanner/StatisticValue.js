@@ -3,15 +3,6 @@ import { formatNumberWithSuffixAndCommas } from '../../utils/format-numbers';
 
 export const StatisticValue = React.memo(({ symbol, value }) => {
 
-    const formatValue = React.useCallback((value) => {
-        if (symbol === '%') return value.toString();
-        else if (!symbol) return value < 1 ? Number(value).toFixed(6) : Number(value).toFixed(2);
-        else return formatNumberWithSuffixAndCommas(value);
-    }, []);
-
-    const formatedValue = formatValue(value);
-
-    
     return (
         <div>
             {(symbol === '$' || symbol === '€') &&
@@ -19,7 +10,7 @@ export const StatisticValue = React.memo(({ symbol, value }) => {
                     {symbol}
                 </span>}
             <span className='font-app-font-family-primary text-app-text-primary text-app-xl'>
-                {formatedValue}
+                {value}
             </span>
             {(symbol === '%') && <span className='font-app-font-family-primary text-app-text-primary text-app-xl ml-app-xs'>
                 {symbol}
