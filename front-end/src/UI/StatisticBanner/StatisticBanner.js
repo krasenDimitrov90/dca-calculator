@@ -4,7 +4,7 @@ import './StatisticBanner.styles.css';
 import { StatisticValue } from './StatisticValue';
 import { formatNumberWithSuffixAndCommas } from '../../utils/format-numbers';
 
-export const StatisticBanner = React.memo(({
+export const StatisticBanner = ({
     symbol, value, label, image
 }) => {
 
@@ -35,7 +35,7 @@ export const StatisticBanner = React.memo(({
             </div>
         </div>
     );
-});
+};
 
 StatisticBanner.images = {
     BTC: '/images/btc-logo.png',

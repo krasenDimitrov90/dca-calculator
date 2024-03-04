@@ -5,10 +5,10 @@ import { fiatCurrencyActions } from '../../store/fiat-currency';
 import { useSelector, useDispatch } from 'react-redux';
 import { AssetPriceValue } from '../../UI';
 
-export const Navigation = React.memo(({currentFiatCurrency, currentBTCPrice}) => {
+export const Navigation = ({ currentFiatCurrency, currentBTCPrice }) => {
 
     const dispathc = useDispatch();
-    const { current: fiatCurrency, fiatCurrencies } = useSelector(state => state.fiatCurrency);
+    const { fiatCurrencies } = useSelector(state => state.fiatCurrency);
 
     const onCurruncyChange = (value) => {
         dispathc(fiatCurrencyActions.changeCurrency({ currency: value }));
@@ -36,4 +36,4 @@ export const Navigation = React.memo(({currentFiatCurrency, currentBTCPrice}) =>
             />
         </div>
     );
-});
+};

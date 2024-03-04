@@ -20,7 +20,7 @@ export const createInvestmentHistory = (historyPrices, fiatInvested, fiatCurrenc
         totalBitcoinBalance += btcPurchased;
 
         const balance = totalBitcoinBalance * btcPrice;
-       
+
         acc.push({
             date,
             btcPrice,

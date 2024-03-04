@@ -32,7 +32,7 @@ const initialState = {
     },
 };
 
-export const Statistics = React.memo(({ btcHistory, purchaseAmount }) => {
+export const Statistics = ({ btcHistory, purchaseAmount }) => {
 
     const [portfolio, setPortfolio] = React.useState(initialState);
     const currency = useSelector(state => state.fiatCurrency.current);
@@ -78,4 +78,4 @@ export const Statistics = React.memo(({ btcHistory, purchaseAmount }) => {
             }
         </div>
     );
-});
+};

@@ -13,13 +13,13 @@ const Row = ({
     currentFiatCurrency
 }) => {
 
-    const leftSymbols = { USD: '$', EUR: '€'};
+    const leftSymbols = { USD: '$', EUR: '€' };
     const rightSymbols = { BGN: 'BGN' };
     const leftSymbol = leftSymbols[currentFiatCurrency] || '';
     const rightSymbol = rightSymbols[currentFiatCurrency] || '';
 
     const formatedBtcPrice = formatNumberWithSuffixAndCommas(btcPrice);
-    const formatedBtcPurchased = btcPurchased < 1 ? Number(btcPurchased).toFixed(6): Number(btcPurchased).toFixed(2);
+    const formatedBtcPurchased = btcPurchased < 1 ? Number(btcPurchased).toFixed(6) : Number(btcPurchased).toFixed(2);
     const formatedBalance = formatNumberWithSuffixAndCommas(balance);
     const formatedTotalCost = formatNumberWithSuffixAndCommas(totalCost);
 
@@ -35,9 +35,9 @@ const Row = ({
     );
 };
 
-export const InvestmentsHistoryTable = React.memo(({ historyData, purchaseAmount, currentFiatCurrency }) => {
+export const InvestmentsHistoryTable = ({ historyData, purchaseAmount, currentFiatCurrency }) => {
     const investmentHistory = createInvestmentHistory(historyData, purchaseAmount, currentFiatCurrency.toLowerCase());
-
+    
     return (
         <div className='portfolio-table-container'>
             <table className='portfolio-table'>
@@ -70,4 +70,4 @@ export const InvestmentsHistoryTable = React.memo(({ historyData, purchaseAmount
             </table>
         </div>
     );
-});
+};

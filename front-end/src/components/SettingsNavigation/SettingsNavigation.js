@@ -26,7 +26,7 @@ const SELECTTORS = [
 ];
 
 
-export const SettingsNavigation = React.memo(({
+export const SettingsNavigation = ({
     currentFiatCurrency, investmentData, onChange
 }) => {
 
@@ -104,4 +104,4 @@ export const SettingsNavigation = React.memo(({
 
         </div>
     );
-});
+};

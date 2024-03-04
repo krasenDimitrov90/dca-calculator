@@ -1,7 +1,7 @@
 import React from 'react';
 import { formatNumberWithSuffixAndCommas } from '../../utils/format-numbers';
 
-export const StatisticValue = React.memo(({ symbol, value }) => {
+export const StatisticValue = ({ symbol, value }) => {
 
     return (
         <div>
@@ -20,4 +20,4 @@ export const StatisticValue = React.memo(({ symbol, value }) => {
             </span>}
         </div>
     );
-});
+};

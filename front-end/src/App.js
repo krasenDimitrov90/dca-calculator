@@ -10,7 +10,7 @@ import { Loader } from './components';
 
 const App = () => {
 
-    const [busy, setBusy] = useState(true)
+    const [busy, setBusy] = useState(true);
 
     const dispatch = useDispatch();
 
@@ -18,8 +18,9 @@ const App = () => {
         setBusy(true)
         try {
             let btcPrice = {};
-            const btcInUsd = await BitcoinService.getBTCPrice('USDT')
-            const btcInEur = await BitcoinService.getBTCPrice('EUR')
+            let preventLoadingStop = true;
+            const btcInUsd = await BitcoinService.getBTCPrice('USDT', preventLoadingStop);
+            const btcInEur = await BitcoinService.getBTCPrice('EUR', preventLoadingStop)
             const btcInBgn = Number(btcInEur.price) * 1.96;
 
             btcPrice = {
@@ -43,11 +44,21 @@ const App = () => {
 
     };
 
-    console.log('APP')
-
     React.useEffect(() => {
         prepareBTCPrice();
     }, []);
+
+    return (
+        <>
+            <div className='flex flex-1 flex-col relative'>
+                {
+                    busy
+                    ? <Loader variant={Loader.variants.LOADER_BARS} />
+                    : <Pages.Calculator />
+                }
+            </div>
+        </>
+    );
 
     return (
         <>

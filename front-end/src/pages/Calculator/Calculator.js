@@ -1,16 +1,17 @@
 import React from 'react';
 import './Calculator.styles.css';
-import { InvestmentsHistoryTable, Navigation, SettingsNavigation, Statistics } from '../../components/index';
+import { InvestmentsHistoryTable, Loader, Navigation, SettingsNavigation, Statistics } from '../../components/index';
 
 import { useSelector } from 'react-redux';
 
 import { subtractYears, sumYears } from '../../utils';
 import { BitcoinService } from '../../services/BitcoinService';
 
-export const Calculator = React.memo(() => {
+export const Calculator = () => {
 
     const currentFiatCurrency = useSelector(state => state.fiatCurrency.current);
     const currentBTCPrice = useSelector(state => state.bitcoin.prices);
+    const appIsLoading = useSelector(state => state.appLoading.appIsLoading);
 
     const start = subtractYears(new Date(), 1);
     const end = sumYears(start, 1);
@@ -45,37 +46,39 @@ export const Calculator = React.memo(() => {
         }
     };
 
-    React.useEffect(() => {        
+    React.useEffect(() => {
         fetchBtcHistory(investmentData);
     }, []);
 
-
     return (
-        <div className='container'>
-            <Navigation currentFiatCurrency={currentFiatCurrency} currentBTCPrice={currentBTCPrice} />
+        <>
+            {appIsLoading ? <Loader variant={Loader.variants.LOADER_BARS} /> : undefined}
+            <div className='container'>
+                <Navigation currentFiatCurrency={currentFiatCurrency} currentBTCPrice={currentBTCPrice} />
 
-            <div className='flex flex-col'>
-                <Statistics 
-                    btcHistory={historyData}
-                    purchaseAmount={investmentData.purchaseAmount}
-                />
-                <div className='flex flex-col-reverse desktop:flex-row my-app-sm'>
-                    <div className='portfolio-left-section-wrapper custom-gradient-secondary'>
-                        <InvestmentsHistoryTable
-                            purchaseAmount={investmentData.purchaseAmount}
-                            historyData={historyData}
-                            currentFiatCurrency={currentFiatCurrency}
-                        />
-                    </div>
-                    <div className='portfolio-right-section-wrapper'>
-                        <SettingsNavigation
-                            currentFiatCurrency={currentFiatCurrency}
-                            investmentData={investmentData}
-                            onChange={handleOnChange}
-                        />
+                <div className='flex flex-col'>
+                    <Statistics
+                        btcHistory={historyData}
+                        purchaseAmount={investmentData.purchaseAmount}
+                    />
+                    <div className='flex flex-col-reverse desktop:flex-row my-app-sm'>
+                        <div className='portfolio-left-section-wrapper custom-gradient-secondary'>
+                            <InvestmentsHistoryTable
+                                purchaseAmount={investmentData.purchaseAmount}
+                                historyData={historyData}
+                                currentFiatCurrency={currentFiatCurrency}
+                            />
+                        </div>
+                        <div className='portfolio-right-section-wrapper'>
+                            <SettingsNavigation
+                                currentFiatCurrency={currentFiatCurrency}
+                                investmentData={investmentData}
+                                onChange={handleOnChange}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
-});
+};
