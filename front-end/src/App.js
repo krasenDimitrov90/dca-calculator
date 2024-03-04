@@ -7,6 +7,8 @@ import { bitcoinActions } from './store/bitcoin';
 import { appLoadingActions } from './store/loading';
 import { BitcoinService } from './services/BitcoinService';
 
+import { Loader } from './components';
+
 const App = () => {
 
     const [busy, setBusy] = useState(true)
@@ -40,7 +42,7 @@ const App = () => {
             dispatch(bitcoinActions.setBitcoinPrices(btcPrice));
         } finally {
             setBusy(false)
-            dispatch(appLoadingActions.setAppIsLoading(false))
+            // dispatch(appLoadingActions.setAppIsLoading(false))
         }
 
     };
@@ -51,8 +53,10 @@ const App = () => {
 
     return (
         <>
-            <div className='flex flex-1 relative'>
-                {appIsLoading && <div className='bg-black text-white text-app-3xl flex justify-center items-center z-[1060] opacity-[0.5] absolute top-0 left-0 bottom-0 right-0'>Loading....</div>}
+                {/* {<Loader />} */}
+            {appIsLoading && <Loader />}
+            <div className='flex flex-1 flex-col relative'>
+                {/* {appIsLoading && <div className='bg-black text-white text-app-3xl flex justify-center items-center z-[1060] opacity-[0.5] absolute top-0 left-0 bottom-0 right-0'>Loading....</div>} */}
                 {busy ? undefined : <Pages.Calculator />}
             </div>
         </>
