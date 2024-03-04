@@ -1,10 +1,22 @@
 import React from 'react';
-import './Loader.styles.css';
+import * as Variants from './Loaders/index';
 
-export const Loader = React.memo(() => {
+import { useSelector } from 'react-redux';
+
+export const Loader = React.memo((props) => {
+    const appIsLoading = useSelector(state => state.appLoading.appIsLoading);
+    const variant = props.variant;
+
+    const VariantComponent = React.useMemo(() => {
+        return Variants[variant] || <div>There is missing variant for ${variant}</div>
+    },[variant]);
+
     return (
-        <div className='loader-wrapper'>
-            <div className="loader-bars"></div>
-        </div>
+        appIsLoading ? <VariantComponent {...props} /> : undefined
     );
 });
+
+
+Loader.variants = {
+    LOADER_BARS: 'LoaderBars',
+};
