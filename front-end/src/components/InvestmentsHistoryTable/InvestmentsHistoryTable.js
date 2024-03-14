@@ -4,7 +4,7 @@ import './InvestmentsHistoryTable.styles.css';
 import { createInvestmentHistory } from '../../utils/create-investment-history';
 import { useSelector } from 'react-redux';
 import { Header } from './Header';
-import { Row } from './Row';
+import { Body } from './Body';
 
 
 export const InvestmentsHistoryTable = ({ historyData, purchaseAmount }) => {
@@ -16,24 +16,10 @@ export const InvestmentsHistoryTable = ({ historyData, purchaseAmount }) => {
     <div className='portfolio-table-container'>
       <table className='portfolio-table'>
         <Header />
-        <tbody>
-          {
-            investmentHistory.map((investment, index) => {
-
-              return (
-                <Row
-                  key={`investmentHistory-${investment.date}`}
-                  date={investment.date}
-                  btcPrice={investment.btcPrice}
-                  btcPurchased={investment.btcPurchased}
-                  totalCost={investment.totalCost}
-                  balance={investment.balance}
-                  currentFiatCurrency={currentFiatCurrency}
-                />
-              );
-            })
-          }
-        </tbody>
+        <Body
+          investmentHistory={investmentHistory}
+          currentFiatCurrency={currentFiatCurrency}
+        />
       </table>
     </div>
   );
