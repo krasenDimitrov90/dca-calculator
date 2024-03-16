@@ -1,21 +1,27 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
-export const AssetPriceValue = React.memo(({ fiatCurrency, assetPrice }) => {
+export const AssetPriceValue = React.memo(({ fiatCurrency, assetPrice, priceWentUp }) => {
 
-    const currencieLogos = {
-        USD: '$', EUR: '€', BGN: 'BGN'
-    };
+  const currencieLogos = {
+    USD: '$', EUR: '€', BGN: 'BGN'
+  };
 
-    const value = (Number(assetPrice.toFixed(2))).toLocaleString();
+  let value = 0;
+  if (assetPrice !== null) {
+    value = (Number(assetPrice.toFixed(2))).toLocaleString(undefined, { minimumFractionDigits: 2 });
+  }
 
-    return (
-        <div className='flex py-app-sm'>
-            <p className='text-app-text-primary text-app-xl'>
-                <span>BTC </span>
-                {fiatCurrency !== 'BGN' && <span className='text-[#6BCFB6]'>{currencieLogos[fiatCurrency]}</span>}
-                <span className='text-[#6BCFB6]'>{value} </span>
-                {fiatCurrency === 'BGN' && <span className='text-app-lg text-[#6BCFB6]'>{currencieLogos[fiatCurrency]}</span>}
-            </p>
-        </div>
-    );
+
+  return (
+    <div className='flex py-app-sm'>
+      <p className='text-app-text-primary text-app-xl'>
+        <span>BTC </span>
+        {fiatCurrency !== 'BGN' && <span className='text-[#6BCFB6]'>{currencieLogos[fiatCurrency]}</span>}
+        <span className={priceWentUp ? 'text-[#6BCFB6]' : 'text-red-600'}>
+          {value}
+        </span>
+        {fiatCurrency === 'BGN' && <span className='text-app-lg text-[#6BCFB6]'>{currencieLogos[fiatCurrency]}</span>}
+      </p>
+    </div>
+  );
 });

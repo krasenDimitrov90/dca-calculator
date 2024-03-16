@@ -16,10 +16,13 @@ export const InvestmentsHistoryTable = ({ historyData, purchaseAmount }) => {
     <div className='portfolio-table-container'>
       <table className='portfolio-table'>
         <Header />
-        <Body
-          investmentHistory={investmentHistory}
-          currentFiatCurrency={currentFiatCurrency}
-        />
+        {
+          investmentHistory.length > 0 &&
+          <Body
+            investmentHistory={investmentHistory}
+            currentFiatCurrency={currentFiatCurrency}
+          />
+        }
       </table>
     </div>
   );

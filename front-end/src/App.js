@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import * as Pages from './pages/index';
 
 import { useDispatch } from 'react-redux';
@@ -7,6 +7,7 @@ import { bitcoinActions } from './store/bitcoin';
 import { BitcoinService } from './services/BitcoinService';
 
 import { Loader } from './components';
+
 
 const App = () => {
 

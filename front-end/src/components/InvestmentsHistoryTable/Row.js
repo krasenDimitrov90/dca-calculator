@@ -1,13 +1,14 @@
+import { forwardRef } from "react";
 import { formatNumberWithSuffixAndCommas } from "../../utils/format-numbers";
 
-export const Row = (props) => {
+export const Row = forwardRef((props, ref) => {
   const {
     date,
     btcPrice,
     btcPurchased,
     totalCost,
     balance,
-    currentFiatCurrency
+    currentFiatCurrency,
   } = props;
 
   const leftSymbols = { USD: '$', EUR: '€' };
@@ -22,7 +23,7 @@ export const Row = (props) => {
 
 
   return (
-    <tr>
+    <tr ref={ref}>
       <td data-label="Date">{date}</td>
       <td data-label="Btc price">{leftSymbol}{formatedBtcPrice} <span className='currency-right-symbol'>{rightSymbol}</span></td>
       <td data-label="Btc purchased">{formatedBtcPurchased}</td>
@@ -30,4 +31,4 @@ export const Row = (props) => {
       <td data-label="Balance">{leftSymbol}{formatedBalance} <span className='currency-right-symbol'>{rightSymbol}</span></td>
     </tr>
   );
-};
+});

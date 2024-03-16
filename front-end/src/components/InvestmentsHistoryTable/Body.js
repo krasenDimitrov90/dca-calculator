@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Row } from './Row';
 
 export const Body = ({ investmentHistory, currentFiatCurrency }) => {
+
   return (
     <tbody>
       {
