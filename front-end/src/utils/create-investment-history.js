@@ -12,7 +12,8 @@ export const createInvestmentHistory = (historyPrices, fiatInvested, fiatCurrenc
     let totalBitcoinBalance = 0;
 
     const investmentHistory = historyPrices.reduce((acc, curr) => {
-        const date = formatDateAsLocalString(curr.date);
+        // const date = formatDateAsLocalString(curr.date);
+        const date = new Date(curr.date);
         const btcPrice = curr.prices[fiatCurrency];
         const btcPurchased = fiatInvested / btcPrice;
         const totalCost = fiatInvested;

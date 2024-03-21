@@ -1,3 +1,4 @@
+export * from './Chart/LineChart';
 export * from './InvestmentsHistoryTable/InvestmentsHistoryTable';
 export * from './Loader/Loader';
 export * from './Navigation/Navigation';
