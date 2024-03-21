@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import { useEffect, useRef } from 'react';
 
-export const LineChart = ({ data }) => {
+export const LineChartSmallScreen = ({ data }) => {
   const svgRef = useRef(null);
 
   useEffect(() => {
@@ -10,7 +10,7 @@ export const LineChart = ({ data }) => {
 
     // Declare the chart dimensions and margins.
     const width = 928;
-    const height = 350;
+    const height = 650;
     const marginTop = 20;
     const marginRight = 30;
     const marginBottom = 18;
@@ -42,7 +42,7 @@ export const LineChart = ({ data }) => {
     // Add the x-axis.
     svg.append("g")
       .attr("transform", `translate(0,${height - marginBottom})`)
-      .style("font-size", 16)
+      .style("font-size", 26)
       .call(d3.axisBottom(x).ticks(10).tickSizeOuter(0))
       .call(g => g.select('.domain')
         .attr("stroke", "#7477BC"))
@@ -72,8 +72,8 @@ export const LineChart = ({ data }) => {
     // Add the y-axis, remove the domain line, add grid lines and a label.
     svg.append("g")
       .attr("transform", `translate(${marginLeft},0)`)
-      .style("font-size", 16)
-      .call(d3.axisLeft(y).ticks(height / 40).tickFormat(formatBalance))
+      .style("font-size", 26)
+      .call(d3.axisLeft(y).ticks().tickFormat(formatBalance))
       .call(g => g.select(".domain").remove())
       .call(g => g.selectAll(".tick line")
         .attr("stroke", "#7477BC")
@@ -92,6 +92,7 @@ export const LineChart = ({ data }) => {
 
     // Create the tooltip container.
     const tooltip = svg.append("g");
+    const point = svg.append("g");
 
     function formatValue(value) {
       return value.toLocaleString("en", {
@@ -114,8 +115,9 @@ export const LineChart = ({ data }) => {
     function pointermoved(event) {
       const i = bisect(data, x.invert(d3.pointer(event)[0]));
       tooltip.style("display", null);
-      tooltip.attr("transform", `translate(${x(data[i].date)},${y(data[i].balance)})`);
-      // tooltip.attr("transform", `translate(${marginLeft}, ${marginTop})`);
+      point.style("display", null);
+
+      tooltip.attr("transform", `translate(${width / 2}, ${10})`);
 
       const path = tooltip.selectAll("path")
         .data([,])
@@ -132,11 +134,32 @@ export const LineChart = ({ data }) => {
           .join("tspan")
           .attr("x", 0)
           .attr("y", (_, i) => `${i * 1.1}em`)
+          .style("font-size", 26)
           .attr("font-weight", (_, i) => i ? null : "bold")
           .text(d => d)
         );
 
       size(text, path);
+
+      // Define the filter for the shadow for the point
+      svg
+        .append('defs')
+        .append('filter')
+        .attr('id', 'blur')
+        .append('feGaussianBlur')
+        .attr('in', 'SourceGraphic')
+        .attr('stdDeviation', 2);
+
+      // Add a circle on the chart
+      point.selectAll("circle").remove(); // Remove previous circles
+      point.append("circle")
+        .attr("transform", `translate(${x(data[i].date)},${y(data[i].balance)})`)
+        .attr("cx", 0)
+        .attr("cy", 0)
+        .attr("r", 10) // Adjust the radius as needed
+        .attr("fill", "#6BCFB6")
+        .attr("stroke", "black")
+        .style('filter', 'url(#blur)'); // Adding the filter for the shadow
     }
 
     function pointerleft() {

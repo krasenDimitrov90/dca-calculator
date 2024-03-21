@@ -11,15 +11,15 @@ import { LineChart } from './components/Chart/LineChart';
 import { data2 as data } from './components/Chart/data2';
 
 
-const App = () => {
+/* const App = () => {
   return (
     <div className='mt-20'>
     <LineChart data={data} />
     </div>
   );
-};
+}; */
 
-/* const App = () => {
+const App = () => {
 
   const [busy, setBusy] = useState(true);
 
@@ -71,6 +71,6 @@ const App = () => {
       </div>
     </>
   );
-}; */
+};
 
 export default App;
