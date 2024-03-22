@@ -43,7 +43,7 @@ export const LineChart = ({ data }) => {
     svg.append("g")
       .attr("transform", `translate(0,${height - marginBottom})`)
       .style("font-size", 16)
-      .call(d3.axisBottom(x).ticks(10).tickSizeOuter(0))
+      .call(d3.axisBottom(x).ticks(5).tickSizeOuter(0))
       .call(g => g.select('.domain')
         .attr("stroke", "#7477BC"))
       .call(g => g.selectAll("line").remove())
@@ -120,8 +120,8 @@ export const LineChart = ({ data }) => {
       const path = tooltip.selectAll("path")
         .data([,])
         .join("path")
-        .attr("fill", "white")
-        .attr("stroke", "black");
+        .attr("fill", "#737CD9")
+        .attr("stroke", "#737CD9");
 
       const text = tooltip.selectAll("text")
         .data([,])
@@ -130,6 +130,8 @@ export const LineChart = ({ data }) => {
           .selectAll("tspan")
           .data([formatDate(data[i].date), formatValue(data[i].balance)])
           .join("tspan")
+          .attr("fill", "white")
+
           .attr("x", 0)
           .attr("y", (_, i) => `${i * 1.1}em`)
           .attr("font-weight", (_, i) => i ? null : "bold")
@@ -147,7 +149,21 @@ export const LineChart = ({ data }) => {
     function size(text, path) {
       const { x, y, width: w, height: h } = text.node().getBBox();
       text.attr("transform", `translate(${-w / 2},${15 - y})`);
-      path.attr("d", `M${-w / 2 - 10},5H-5l5,-5l5,5H${w / 2 + 10}v${h + 20}h-${w + 20}z`);
+      path.attr("d", `
+      M${-w / 2 - 10},5
+      H-5
+      l5,-5
+      l5,5
+      H${w / 2 + 10}
+      a5,5 0 0,1 5,5
+      v${h + 20}
+      a5,5 0 0,1 -5,5
+      h-${w + 20}
+      a-5,5 0 0,1 -5,-5
+      v${-h - 20}
+      a5,5 0 0,1 5,-5
+      z`);
+
     }
   }, [data]);
 

@@ -43,7 +43,7 @@ export const LineChartSmallScreen = ({ data }) => {
     svg.append("g")
       .attr("transform", `translate(0,${height - marginBottom})`)
       .style("font-size", 26)
-      .call(d3.axisBottom(x).ticks(10).tickSizeOuter(0))
+      .call(d3.axisBottom(x).ticks(5).tickSizeOuter(0))
       .call(g => g.select('.domain')
         .attr("stroke", "#7477BC"))
       .call(g => g.selectAll("line").remove())
