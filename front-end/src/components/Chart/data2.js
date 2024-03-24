@@ -18,7 +18,7 @@ export const data2 = [
   { date: new Date('2023-05-22T04:53:49.345Z'), balance: 843.9234435574515 },
   { date: new Date('2023-06-04T14:22:22.222Z'), balance: 891.4174700132634 },
   { date: new Date('2023-07-14T13:15:32.012Z'), balance: 951.8808495666777 },
-  { date: new Date('2023-08-29T05:13:13.777Z'), balance: 100.5154336074288 },
+  { date: new Date('2023-08-29T05:13:13.777Z'), balance: 500.5154336074288 },
 ];
 
 // export const data2 = [

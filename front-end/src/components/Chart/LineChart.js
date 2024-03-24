@@ -22,10 +22,16 @@ export const LineChart = ({ data }) => {
     // Declare the y (vertical position) scale.
     const y = d3.scaleLinear([0, d3.max(data, d => d.balance)], [height - marginBottom, marginTop]);
 
-    // Declare the line generator.
-    const line = d3.line()
+    // // Declare the line generator.
+    // const line = d3.line()
+    //   .x(d => x(d.date))
+    //   .y(d => y(d.balance));
+
+    // Declare the area generator.
+    const area = d3.area()
       .x(d => x(d.date))
-      .y(d => y(d.balance));
+      .y0(y(0))
+      .y1(d => y(d.balance));
 
     // Create the SVG container.
     const svg = d3.select(svgRef.current)
@@ -38,6 +44,50 @@ export const LineChart = ({ data }) => {
       .on("pointerenter pointermove", pointermoved)
       .on("pointerleave", pointerleft)
       .on("touchstart", event => event.preventDefault());
+
+    // Define the clipping path dimensions
+    const clipPathWidth = 81; // Adjust as needed
+
+    // Append a path for the line.
+    svg.append("path")
+      .attr("stroke", "#6BCFB6")
+      .attr("stroke-width", 1.5)
+      .attr("d", area(data))
+      .style("fill", `url("#chart-grad")`)
+      .attr("clip-path", "url(#clip-path)");
+
+
+    // Append <defs> section
+    const defs = svg.append("defs");
+
+    defs.append("clipPath")
+      .attr("id", "clip-path")
+      .append("rect")
+      .attr("x", clipPathWidth) // Clip from the left
+      .attr("y", 0)
+      .attr("width", width - (clipPathWidth + 31)) // Adjust width
+      .attr("height", height);
+
+    // Append linearGradient element within <defs>
+    const linearGradient = defs.append("linearGradient")
+      .attr("id", "chart-grad")
+      .attr("x1", "0%")
+      .attr("x2", "0%")
+      .attr("y1", "30%")
+      .attr("y2", "100%");
+
+    linearGradient.selectAll("stop")
+      .data([
+        { offset: "0%", color: "rgba(129,201,149,0.81)", opacity: "0.1" },
+        { offset: "100%", color: "#81c995", opacity: "0" }
+      ])
+      .enter().append("stop")
+      .attr("offset", d => d.offset)
+      .attr("stop-color", d => d.color)
+      .attr("stop-opacity", d => d.opacity);
+
+
+
 
     // Add the x-axis.
     svg.append("g")
@@ -83,12 +133,6 @@ export const LineChart = ({ data }) => {
       .call(g => g.selectAll('text')
         .attr("fill", "#7477BC"))
 
-    // Append a path for the line.
-    svg.append("path")
-      .attr("fill", "none")
-      .attr("stroke", "#6BCFB6")
-      .attr("stroke-width", 1.5)
-      .attr("d", line(data));
 
     // Create the tooltip container.
     const tooltip = svg.append("g");
@@ -167,5 +211,5 @@ export const LineChart = ({ data }) => {
     }
   }, [data]);
 
-  return <svg ref={svgRef} />;
+  return <svg ref={svgRef} />
 }

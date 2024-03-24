@@ -1,8 +1,8 @@
 import store from "../store";
 import { appLoadingActions } from "../store/loading";
 
-// const BASE_URL = 'https://us-central1-dca-calculator-7d77e.cloudfunctions.net/app';
-const BASE_URL = 'http://192.168.100.6:8080';
+const BASE_URL = 'https://us-central1-dca-calculator-7d77e.cloudfunctions.net/app';
+// const BASE_URL = 'http://192.168.100.6:8080';
 // const BASE_URL = 'http://localhost:8080';
 // const BASE_URL = 'https://us-central1-dca-calculator-7d77e.cloudfunctions.net/api/';
 

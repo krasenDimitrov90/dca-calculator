@@ -6,18 +6,18 @@ import { bitcoinActions } from './store/bitcoin';
 
 import { BitcoinService } from './services/BitcoinService';
 
-import { Chart, Loader } from './components';
+import { Loader } from './components';
 import { LineChart } from './components/Chart/LineChart';
 import { data2 as data } from './components/Chart/data2';
 
 
-/* const App = () => {
-  return (
-    <div className='mt-20'>
-    <LineChart data={data} />
-    </div>
-  );
-}; */
+// const App = () => {
+//   return (
+//     <div className='mt-20'>
+//       <LineChart data={data} />
+//     </div>
+//   );
+// };
 
 const App = () => {
 

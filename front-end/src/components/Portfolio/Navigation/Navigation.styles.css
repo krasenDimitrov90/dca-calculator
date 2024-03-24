@@ -1,5 +1,5 @@
 .portfolio-navigation {
-  @apply flex justify-between text-app-text-primary ;
+  @apply flex justify-between text-app-text-primary;
 
   .chart-btn {
     @apply flex justify-center flex-1 p-app-s border-r-app-xs border-r-app-purple;
