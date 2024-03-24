@@ -1,5 +1,6 @@
 import { forwardRef } from "react";
-import { formatNumberWithSuffixAndCommas } from "../../utils/format-numbers";
+import { formatNumberWithSuffixAndCommas } from "../../../utils/format-numbers";
+import { formatDateAsLocalString } from "../../../utils";
 
 export const Row = forwardRef((props, ref) => {
   const {
@@ -16,6 +17,7 @@ export const Row = forwardRef((props, ref) => {
   const leftSymbol = leftSymbols[currentFiatCurrency] || '';
   const rightSymbol = rightSymbols[currentFiatCurrency] || '';
 
+  const formatedDate = formatDateAsLocalString(date);
   const formatedBtcPrice = formatNumberWithSuffixAndCommas(btcPrice);
   const formatedBtcPurchased = btcPurchased < 1 ? Number(btcPurchased).toFixed(6) : Number(btcPurchased).toFixed(2);
   const formatedBalance = formatNumberWithSuffixAndCommas(balance);
@@ -24,7 +26,7 @@ export const Row = forwardRef((props, ref) => {
 
   return (
     <tr ref={ref}>
-      <td data-label="Date">{date}</td>
+      <td data-label="Date">{formatedDate}</td>
       <td data-label="Btc price">{leftSymbol}{formatedBtcPrice} <span className='currency-right-symbol'>{rightSymbol}</span></td>
       <td data-label="Btc purchased">{formatedBtcPurchased}</td>
       <td data-label="Total Cost">{leftSymbol}{formatedTotalCost} <span className='currency-right-symbol'>{rightSymbol}</span></td>

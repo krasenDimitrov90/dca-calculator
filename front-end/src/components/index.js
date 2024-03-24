@@ -1,5 +1,5 @@
 export * from './Chart/LineChart';
-export * from './InvestmentsHistoryTable/InvestmentsHistoryTable';
+export * from './Portfolio/Portfolio';
 export * from './Loader/Loader';
 export * from './Navigation/Navigation';
 export * from './SettingsNavigation/SettingsNavigation';

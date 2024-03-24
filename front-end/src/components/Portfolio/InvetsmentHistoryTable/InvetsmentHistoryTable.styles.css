@@ -1,5 +1,5 @@
 .portfolio-table-container {
-    @apply overflow-scroll;
+    @apply overflow-scroll mx-app-lg mb-app-lg;
 }
 
 .portfolio-table {

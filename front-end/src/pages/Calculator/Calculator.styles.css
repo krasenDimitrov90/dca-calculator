@@ -3,9 +3,9 @@
 }
 
 .portfolio-left-section-wrapper {
-    @apply flex h-[410px] bg-app-purple rounded-app-s desktop:mr-app-sm mt-app-sm desktop:mt-0;
+    @apply flex flex-col h-[410px] bg-app-purple rounded-app-s desktop:mr-app-sm mt-app-sm desktop:mt-0;
     @apply desktop:grow-app-3 desktop:shrink-app-3;
-    @apply p-app-lg;
+    @apply overflow-hidden;
 
     /* This come from the index.css file :root */
     @apply desktop:basis-[calc(4_*_var(--basis-app-sm))];;

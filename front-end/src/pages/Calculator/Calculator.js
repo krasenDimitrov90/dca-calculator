@@ -1,6 +1,6 @@
 import React from 'react';
 import './Calculator.styles.css';
-import { InvestmentsHistoryTable, Loader, Navigation, SettingsNavigation, Statistics } from '../../components/index';
+import { Portfolio, Loader, Navigation, SettingsNavigation, Statistics } from '../../components/index';
 
 import { useSelector } from 'react-redux';
 
@@ -63,7 +63,7 @@ export const Calculator = () => {
           />
           <div className='flex flex-col-reverse desktop:flex-row my-app-sm'>
             <div className='portfolio-left-section-wrapper custom-gradient-secondary'>
-              <InvestmentsHistoryTable
+              <Portfolio
                 purchaseAmount={investmentData.purchaseAmount}
                 historyData={historyData}
               />
