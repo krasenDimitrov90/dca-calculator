@@ -14,7 +14,7 @@ export const LineChartSmallScreen = ({ data }) => {
     const marginTop = 20;
     const marginRight = 30;
     const marginBottom = 18;
-    const marginLeft = 80;
+    const marginLeft = 120;
 
     // Declare the x (horizontal position) scale.
     const x = d3.scaleUtc(d3.extent(data, d => d.date), [marginLeft, width - marginRight]);
