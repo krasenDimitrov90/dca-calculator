@@ -16,7 +16,7 @@ export const AssetPriceValue = React.memo(({ fiatCurrency, assetPrice, priceWent
     <div className='flex py-app-sm'>
       <p className='text-app-text-primary text-app-xl'>
         <span>BTC </span>
-        {fiatCurrency !== 'BGN' && <span className='text-[#6BCFB6]'>{currencieLogos[fiatCurrency]}</span>}
+        {fiatCurrency !== 'BGN' && <span className='text-[#6BCFB6] text-app-lg'>{currencieLogos[fiatCurrency]}</span>}
         <span className={priceWentUp ? 'text-[#6BCFB6]' : 'text-red-600'}>
           {value}
         </span>

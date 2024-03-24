@@ -17,7 +17,7 @@
         @apply text-app-text-secondary px-app-xs;
         @apply desktop:sticky desktop:top-0;
     }
-    tr:hover {
+    tbody > tr:hover {
         @apply bg-app-purple transition-all ease-in-out duration-150;
     }
 
