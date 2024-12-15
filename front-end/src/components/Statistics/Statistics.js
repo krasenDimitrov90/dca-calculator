@@ -24,9 +24,9 @@ const initialState = {
         image: 'CHART',
         symbols: { USD: '$', EUR: '€', BGN: 'BGN' }
     },
-    "percent-change": {
+    "profit": {
         value: 0,
-        label: "Percent change",
+        label: "Profit",
         image: ['ARROW_UP', 'ARROW_DOWN'],
         symbols: { USD: '%', EUR: '%', BGN: '%' }
     },
@@ -48,7 +48,7 @@ export const Statistics = ({ btcHistory, purchaseAmount }) => {
                 "bitcoin-acumulated": { ...curr["bitcoin-acumulated"], value: btcAcummulated },
                 "total-invested": { ...curr["total-invested"], value: totalInvested },
                 "total-value": { ...curr["total-value"], value: totalValue },
-                "percent-change": { ...curr["percent-change"], value: percentageChange },
+                "profit": { ...curr["profit"], value: percentageChange },
             };
 
             return newState;
@@ -60,7 +60,7 @@ export const Statistics = ({ btcHistory, purchaseAmount }) => {
             {
                 Object.values(portfolio).map(banner => {
                     let image = '';
-                    if (banner.label === 'Percent change') {
+                    if (banner.label === 'Profit') {
                         image = banner.value > 0 ? banner.image[0] : banner.image[1];
                     } else {
                         image = banner.image;

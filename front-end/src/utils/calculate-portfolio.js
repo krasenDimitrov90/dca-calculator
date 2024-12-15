@@ -26,9 +26,6 @@ export const calculatePortfolio = (data, purchaseAmount) => {
   let totalValueOfBitcoinInFiat = portfolio.accumulated * BTC_PRICE;
   let profit = ((totalValueOfBitcoinInFiat - portfolio.invested) / Math.abs(portfolio.invested)) * 100;
 
-  if (profit > 0) {
-    profit += 100;
-  }
   console.log({ totalValueOfBitcoinInFiat, portfolio });
   return {
     btcAcummulated: portfolio.accumulated.toFixed(5),

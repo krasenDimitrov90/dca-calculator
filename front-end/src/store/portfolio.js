@@ -18,9 +18,9 @@ const initialState = {
         image: 'CHART',
         symbols: { USD: '$', EUR: '€', BGN: 'lv' }
     },
-    "percent-change": {
+    "profit": {
         value: 0,
-        label: "Percent change",
+        label: "Profit",
         image: ['ARROW_UP', 'ARROW_DOWN'],
         symbols: { USD: '%', EUR: '%', BGN: '%' }
     },
@@ -40,7 +40,7 @@ const portfolioSlice = createSlice({
             state["bitcoin-acumulated"].value = btcAcummulated;
             state["total-invested"].value = totalInvested;
             state["total-value"].value = totalValue;
-            state["percent-change"].value = percentageChange;
+            state["profit"].value = percentageChange;
         }
     },
 });
