@@ -1,6 +1,6 @@
 const getBitcoinPriceHistory = async (vsCurrency) => {
   const baseUrl = 'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart';
-  const fromTimestamp = Math.floor(new Date('2024/12/01').getTime() / 1000);
+  const fromTimestamp = Math.floor(new Date('2025/06/01').getTime() / 1000);
   const toTimestamp = Math.floor(new Date().getTime() / 1000);
   // const toTimestamp = fromTimestamp
 
