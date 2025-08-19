@@ -11,6 +11,8 @@ const btcSchedule = cron.schedule('*/30 * * * * *', async () => {
     const lastDocument = await Bitcoin.findOne({}, {}, { sort: { date: -1 } });
     const lastStoredPriceDate = lastDocument ? lastDocument.date : null;
     // const lastStoredPriceDate = new Date('2025/06/01');
+    const endDate = new Date();
+    console.log({ lastStoredPriceDate, endDate });
 
     btcPrices = await fetchBitcoinPrice(new Date(lastStoredPriceDate), new Date());
 
