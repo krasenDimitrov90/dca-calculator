@@ -3,8 +3,8 @@ const Bitcoin = require('./models/bitcoin');
 const fetchBitcoinPrice = require('./utils/fetch-btc-price');
 const { parseInputDataItemAndDateFormat } = require('./utils/parser');
 
-// const btcSchedule = cron.schedule('33 21 * * *', async () => {
-const btcSchedule = cron.schedule('*/30 * * * * *', async () => {
+const btcSchedule = cron.schedule('33 21 * * *', async () => {
+// const btcSchedule = cron.schedule('*/30 * * * * *', async () => {
   console.log('running a task every day at 21:30');
   let btcPrices = [];
   try {
