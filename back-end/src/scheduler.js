@@ -3,17 +3,16 @@ const Bitcoin = require('./models/bitcoin');
 const fetchBitcoinPrice = require('./utils/fetch-btc-price');
 const { parseInputDataItemAndDateFormat } = require('./utils/parser');
 
-const btcSchedule = cron.schedule('30 21 * * *', async () => { // at 21:30
-// const btcSchedule = cron.schedule('*/10 * * * * *', async () => { every 10 minutes
+// const btcSchedule = cron.schedule('33 21 * * *', async () => {
+const btcSchedule = cron.schedule('*/30 * * * * *', async () => {
   console.log('running a task every day at 21:30');
   let btcPrices = [];
   try {
-    btcPrices = await fetchBitcoinPrice();
-    // const btcPrices = [{ date: '28/02/2024', prices: [{ usd: '61185.65' }, { euro: '56474.05' }, { bgn: '110431.23' }] }];
-    // console.log({ btcPrices });
-    // btcPrices.map(({ date, prices }) => {
-    //     console.log({ date, prices });
-    // })
+    const lastDocument = await Bitcoin.findOne({}, {}, { sort: { date: -1 } });
+    const lastStoredPriceDate = lastDocument ? lastDocument.date : null;
+    // const lastStoredPriceDate = new Date('2025/06/01');
+
+    btcPrices = await fetchBitcoinPrice(new Date(lastStoredPriceDate), new Date());
 
     const formatedBtcPrices = btcPrices.map(parseInputDataItemAndDateFormat);
     formatedBtcPrices.map(({ date, prices }) => {
@@ -32,9 +31,3 @@ const btcSchedule = cron.schedule('30 21 * * *', async () => { // at 21:30
     console.log({ error });
   }
 });
-
-// module.exports = btcSchedule.start;
-
-// module.exports = {
-//     startBtcSchedule: () => btcSchedule.start(),
-// };
