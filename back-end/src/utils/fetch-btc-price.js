@@ -1,8 +1,7 @@
-const getBitcoinPriceHistory = async (vsCurrency) => {
+const getBitcoinPriceHistory = async (vsCurrency, startDate, endDate) => {
   const baseUrl = 'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart';
-  const fromTimestamp = Math.floor(new Date('2025/06/01').getTime() / 1000);
-  const toTimestamp = Math.floor(new Date().getTime() / 1000);
-  // const toTimestamp = fromTimestamp
+  const fromTimestamp = Math.floor(startDate.getTime() / 1000);
+  const toTimestamp = Math.floor(endDate.getTime() / 1000);
 
   const url = `${baseUrl}?vs_currency=${vsCurrency}&from=${fromTimestamp}&to=${toTimestamp}&days=${(toTimestamp - fromTimestamp) / (24 * 60 * 60)}`;
 
@@ -23,9 +22,9 @@ const getBitcoinPriceHistory = async (vsCurrency) => {
   }
 };
 
-const mergeEuroPrices = async (bitcoinPriceHistory) => {
+const mergeEuroPrices = async (bitcoinPriceHistory, startDate, endDate) => {
   try {
-    const euroData = await getBitcoinPriceHistory('eur');
+    const euroData = await getBitcoinPriceHistory('eur', startDate, endDate);
 
     if (euroData) {
       // Get the exchange rate between Euro and Bulgarian Lev (BGN)
@@ -70,10 +69,10 @@ const getExchangeRate = async (fromCurrency, toCurrency) => {
 };
 
 
-const fetchBitcoinPrice = async () => {
+const fetchBitcoinPrice = async (startDate, endDate) => {
   try {
-    const bitcoinPriceHistoryUSD = await getBitcoinPriceHistory('usd');
-    const bitcoinPriceHistoryWithEuro = await mergeEuroPrices(bitcoinPriceHistoryUSD);
+    const bitcoinPriceHistoryUSD = await getBitcoinPriceHistory('usd', startDate, endDate);
+    const bitcoinPriceHistoryWithEuro = await mergeEuroPrices(bitcoinPriceHistoryUSD, startDate, endDate);
     const filteredPrices = filterPrices(bitcoinPriceHistoryWithEuro);
     if (bitcoinPriceHistoryWithEuro) {
       // Output the final formatted data
